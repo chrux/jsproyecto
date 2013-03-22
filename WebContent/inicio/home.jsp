@@ -45,9 +45,12 @@ String mensaje = request.getParameter("mensaje");
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="<%= ruta %>/inicio/home.jsp">Home</a></li>
+        <jsp:include page="../include/menu.jsp">
+          <jsp:param name="ruta" value="<%=ruta %>"></jsp:param>
+        </jsp:include>
+          <%-- <li class="active"><a href="<%= ruta %>/inicio/home.jsp">Home</a></li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#">Contact</a></li> --%>
         </ul>
         <h3 class="muted">Project Manager</h3>
       </div>
@@ -55,116 +58,20 @@ String mensaje = request.getParameter("mensaje");
       <hr>
 
       <div class="jumbotron">
-        <h1>Super awesome marketing speak!</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <a class="btn btn-large btn-success" href="#">Sign up today</a>
+        <h1>Bienvenido! <%= user.getNombre()%></h1>
+        <% /* %><a class="btn btn-large btn-success" href="#">Sign up today</a><% */ %>
       </div>
 
-      <hr>
-
-      <div class="row-fluid marketing">
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="span6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="footer">
-        <p>&copy; Company 2013</p>
-      </div>
+      <jsp:include page="../include/footer.jsp">
+      	<jsp:param name="ruta" value="<%=ruta%>"></jsp:param>
+      </jsp:include>
 
     </div> <!-- /container -->
-    <% /* %>
-	<div id="container">
-		<div id="header">
-			<h1>
-				Bienvenido al Sistema, Usuario:
-				<%=user.getNombre()%>
-			</h1>
-		</div>
-		<div id="navigation">
-			
-		<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar Sesión</a>
-		<!-- <form action="./login.do?cierre=si">
-<input type="submit" value="Cerrar Session">
-</input>
-</form> -->
-		</div>
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tbody>
-			<tr>
-			<td id="leftcontent" nowrap="nowrap" valign="top" width="190">
-					<div class="bar">
-						<img src="<%=ruta%>/images/hr_dots1.gif" alt="" height="3" width="150" />
-					</div> <!-- ** Menu Start ** //--> <jsp:include
-						page="../include/menu.jsp"><jsp:param name="ruta" value="<%=ruta %>"></jsp:param></jsp:include> <!-- ** Menu End ** //-->
-
-				</td>
-			
-		<td valign="top" width="100%">
-		<br/>
-		<br/>
-		<br/>
-		
-		<!-- <div id="content-container"> -->
-		<div class="header2">Inicio de la Aplicación</div>
-		<% if(mensaje!=null) {%>
-	<p style="color: red;"><%=mensaje %></p>
-	<%} %>
-		<p>
-		
-						<b>Bienvenido</b><br /> &nbsp;<br />
-						Trabajo en JSP<br /> 
-						TECNOLOGÍAS DE DESARROLLO DE SOFTWARE DE GESTIÓN<br /> &nbsp;<br />
-						TEMA: MANEJO DE PROYECTOS <br /><br /><br />
-						 Copyright (c) 2012
-						Eliezer Ampié<br /> &nbsp;<br />
-					</p>
-			<div id="section-navigation">
-				<ul>
-					<!-- <li><a href="#">Section page 1</a></li>
-					<li><a href="./Test.jsp">Test de Sesión</a></li> -->
-				</ul>
-			</div>
-			<br/>
-		<br/>
-		<br/>
-				</td>
-			</tr>
-			</tbody>
-				</table>
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					
-				<td>
-			<div id="footer"><!-- Copyright © Tarea login, 2012 ---- Eliezer A. - Sergio U. -->
-			<jsp:include page="../include/footer.jsp"><jsp:param
-			name="ruta" value="<%=ruta%>"></jsp:param></jsp:include>
-			</div>
-			</td>
-			</tr>
-				</table>
-	<!-- 	</div> -->
-	</div>
-	<% */ %>
+    
+	<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%= ruta %>/assets/js/jquery.js"></script>
+    <script src="<%= ruta %>/assets/js/bootstrap.js"></script>
 </body>
 </html>

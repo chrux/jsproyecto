@@ -8,7 +8,7 @@ public class Menu {
 	public String getListMenu(Usuario user, String ruta) {
 		String datos = "";
 
-		String sql = "Select o.idopcion, o.descripcion, os.Usuario from Opcion o " + 
+		String sql = "Select o.idopcion, o.url, o.descripcion, os.Usuario, (select count(idopcion) from Opcion h where h.padre=o.idopcion) hijos  from Opcion o " + 
 " inner join opcion_por_usuario os on os.idopcion=o.idopcion "+ 
 " where o.padre=0 and o.orden<>0 and os.Usuario=? order by o.orden;";
 
@@ -23,9 +23,14 @@ public class Menu {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				datos = datos + "<li>";
-				datos = datos + "<a href=\"#\" class=\"p7PMtrg\">" + cx.getString("descripcion") + "</a>";
-				datos = datos + getHijos(user.getNlogin(), cx.getInt("idopcion"), ruta);
+				if ( cx.getInt("hijos") > 0 ) {
+					datos = datos + "<li class=\"dropdown\">";
+					datos = datos + "<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + cx.getString("descripcion") + " <b class=\"caret\"></b></a>";
+					datos = datos + getHijos(user.getNlogin(), cx.getInt("idopcion"), ruta);
+				} else {
+					datos = datos + "<li>";
+					datos = datos + "<a href=\"" + ruta + '/' + cx.getString("url") + "\" class=\"\">" + cx.getString("descripcion") + "</a>";
+				}
 
 				datos = datos + "</li>";
 			}
@@ -58,7 +63,7 @@ public class Menu {
 
 			cx.executestmt();
 
-			hijos = hijos + "<ul class="">";
+			hijos = hijos + "<ul class=\"dropdown-menu\">";
 			while (cx.getNext()) {
 				hijos = hijos + "<li><a href=\"" + ruta + "/"
 						+ cx.getString("url") + "\">"
