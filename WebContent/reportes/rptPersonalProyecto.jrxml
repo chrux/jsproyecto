@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptPersonalProyecto" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="4"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Id_Proyecto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+prp.Id_Proyecto,
+     Pro.Nombre Proyecto,
+     prp.`Id_Personal_proyecto`,
+     per.`Nombre` AS Persona,
+     prp.`Fecha_Inicio` AS FechaInicio,
+     prp.`Fecha_Final` AS FechaFinal,
+     per.`Cedula` AS Cedula,
+     per.`Estado_Civil` AS EstadoCivil,
+     per.`Direccion` AS Direccion
+FROM
+     `personal_proyecto` prp INNER JOIN `personal` per ON prp.`Id_Personal` = per.`Id_Personal`
+     INNER JOIN `proyecto` pro ON prp.`Id_proyecto` = pro.`Id_Proyecto`
+WHERE prp.Id_Proyecto=$P{Id_Proyecto}]]>
+	</queryString>
+	<field name="Id_Proyecto" class="java.lang.Integer"/>
+	<field name="Proyecto" class="java.lang.String"/>
+	<field name="Id_Personal_proyecto" class="java.lang.Integer"/>
+	<field name="Persona" class="java.lang.String"/>
+	<field name="FechaInicio" class="java.sql.Date"/>
+	<field name="FechaFinal" class="java.sql.Date"/>
+	<field name="Cedula" class="java.lang.String"/>
+	<field name="EstadoCivil" class="java.lang.Boolean"/>
+	<field name="Direccion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="55" width="802" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial Unicode MS" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal para Proyectos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="41" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Proyecto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="41" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nombre Persona]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="283" y="41" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha de Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="41" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha Final]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="506" y="41" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="621" y="41" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="139" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Proyecto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="123" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Persona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="283" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{FechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="393" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{FechaFinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="506" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="621" y="0" width="181" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Direccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,149 @@
+.p7TP_tabs {
+    padding-bottom: 0;
+    padding-left: 14px;
+    padding-right: 0;
+    padding-top: 0;
+}
+#p7TP1 .p7TP_tabs a, #p7TP2 .p7TP_tabs a, #p7TP3 .p7TP_tabs a, #p7TP4 .p7TP_tabs a, #p7TP5 .p7TP_tabs a {
+    -moz-text-blink: none;
+    -moz-text-decoration-color: -moz-use-text-color;
+    -moz-text-decoration-line: none;
+    -moz-text-decoration-style: solid;
+    background-color: transparent;
+    background-image: url("../images/tab_off_left.gif");
+    background-position: right top;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-weight: bold;
+    padding-bottom: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 5px;
+}
+#p7TP1 .p7TP_tabs a:hover, #p7TP2 .p7TP_tabs a:hover, #p7TP3 .p7TP_tabs a:hover, #p7TP4 .p7TP_tabs a:hover, #p7TP5 .p7TP_tabs a:hover, #p7TP1 .p7TP_tabs a:active, #p7TP2 .p7TP_tabs a:active, #p7TP3 .p7TP_tabs a:active, #p7TP4 .p7TP_tabs a:active, #p7TP5 .p7TP_tabs a:active {
+    background-color: transparent;
+    color: #5382A1;
+}
+.p7TP_tabs div {
+    background-image: url("../images/tab_off_right.gif");
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 1px;
+    margin-top: 0;
+}
+.p7TPclear {
+    clear: both;
+    font-size: 0;
+    height: 0;
+    line-height: 0;
+}
+.p7TPcontent {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F9F0DE;
+    border-bottom-color: #CEA258;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color-ltr-source: physical;
+    border-left-color-rtl-source: physical;
+    border-left-color-value: #CEA258;
+    border-left-style-ltr-source: physical;
+    border-left-style-rtl-source: physical;
+    border-left-style-value: solid;
+    border-left-width-ltr-source: physical;
+    border-left-width-rtl-source: physical;
+    border-left-width-value: 1px;
+    border-right-color-ltr-source: physical;
+    border-right-color-rtl-source: physical;
+    border-right-color-value: #CEA258;
+    border-right-style-ltr-source: physical;
+    border-right-style-rtl-source: physical;
+    border-right-style-value: solid;
+    border-right-width-ltr-source: physical;
+    border-right-width-rtl-source: physical;
+    border-right-width-value: 1px;
+    border-top-color: #CEA258;
+    border-top-style: solid;
+    border-top-width: 1px;
+    color: #5382A1;
+    font-size: 1em;
+    left: 0;
+    line-height: 1.5em;
+    margin-bottom: 5px;
+    padding-bottom: 3px;
+    padding-left: 24px;
+    padding-right: 0;
+    padding-top: 5px;
+    position: relative;
+    top: -1px;
+    z-index: 1;
+}
+.p7TPcontent span {
+    color: #FF6600;
+}
+#p7TP1 .p7TP_tabs div.down, #p7TP2 .p7TP_tabs div.down, #p7TP3 .p7TP_tabs div.down, #p7TP4 .p7TP_tabs div.down, #p7TP5 .p7TP_tabs div.down {
+    background-image: url("../images/tab_on_right.gif");
+    background-repeat: no-repeat;
+    color: #5382A1;
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    position: relative;
+    z-index: 2;
+}
+#p7TP1 .p7TP_tabs div.down a, #p7TP2 .p7TP_tabs div.down a, #p7TP3 .p7TP_tabs div.down a, #p7TP4 .p7TP_tabs div.down a, #p7TP5 .p7TP_tabs div.down a {
+    background-image: url("../images/tab_on_left.gif");
+    background-position: right top;
+    background-repeat: no-repeat;
+    color: #5382A1;
+}
+.p7TP_tabs {
+    display: none;
+}
+.p7TP52 {
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+#p7TP52 .p7TP_tabs2 span {
+    -moz-text-blink: none;
+    -moz-text-decoration-color: -moz-use-text-color;
+    -moz-text-decoration-line: none;
+    -moz-text-decoration-style: solid;
+    background-color: transparent;
+    background-image: url("../images/tab_off_left.gif");
+    background-position: right top;
+    background-repeat: no-repeat;
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font-weight: bold;
+    padding-bottom: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 5px;
+}
+.p7TP_tabs2 div {
+    background-image: url("../images/tab_off_right.gif");
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 1px;
+    margin-top: 0;
+}
