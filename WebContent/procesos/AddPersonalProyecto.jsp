@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="com.clase.dao.CargoDao"%>
 <%@page import="com.clase.models.Cargo"%>
 <%@page import="com.clase.dao.OficioDao"%>
@@ -11,12 +18,19 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.clase.models.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Personal de Proyecto | ProjectManager</title>
 <%
 	PersonalProyecto myPers = new PersonalProyecto();
 
@@ -26,9 +40,6 @@
 	java.util.Date date = new java.util.Date();
 	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
 			"dd/MM/yyyy");
-
-	//obtener ruta del contexto
-	String ruta = request.getContextPath();
 
 	/*Obtener la lista de Personal*/
 	ArrayList<Personal> ListPersonal = new ArrayList<Personal>();
@@ -63,7 +74,7 @@
 	String table="0";
 	try {
 		table = request.getParameter("idProy");
-		System.out.println("Entra aquí con Parámetro (table) : " + table);
+		System.out.println("Entra aquÃ­ con ParÃ¡metro (table) : " + table);
 	} catch (Exception e) {
 		table = "0";
 	}
@@ -73,36 +84,40 @@
 	int idPersProy;
 	try {
 		idPersProy = Integer.parseInt(request.getParameter("idPersProy"));
-		System.out.println("Entra aquí con Parámetro (idPersProy): " + idPersProy);
+		System.out.println("Entra aquÃ­ con ParÃ¡metro (idPersProy): " + idPersProy);
 	} catch (Exception e) {
 		idPersProy = 0;
 	}
 	
 	if (!table.isEmpty() && !table.contains("0")) {
 		param = Integer.parseInt(table);
-		System.out.println("Entra aquí con Parámetro: " + table);
+		System.out.println("Entra aquÃ­ con ParÃ¡metro: " + table);
 		//ProyectosDao servicio = new ProyectosDao();
 		//proy = servicio.findById( param);
 
 	}
 %>
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
 
-
-<title>Agregar Personal</title>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
 </head>
-<body onload="P7_initPM(0,1,0,0,-1)">
-
-	<form action="../PersonalProy.do?" method="post"
-		class="cmxform">
+<body>
+	<form action="../PersonalProy.do?" method="post" class="cmxform">
 		<fieldset>
 			<legend>Agregar Personal Proyecto</legend>
-			<table border="0" width="50%" class="CssTable">
+			<table>
 
 				<tr>
 					<td align="left"><label>Persona:</label></td>
 					<td align="left"><select name="idPersonal"
 						style="width: 250px" id="idPersonal">
-							<option value="-1">Selecione Aquí..</option>
+							<option value="-1">Selecione AquÃ­..</option>
 							<%
 								for (int i = 0; i < ListPersonal.size(); i++) {
 									if (ListPersonal.get(i).getIdPersonal() == myPers
@@ -127,7 +142,7 @@
 					<td align="left"><label>Cargo:</label></td>
 					<td align="left"><select name="idCargo"
 						style="width: 250px" id="idCargo">
-							<option value="-1">Selecione Aquí..</option>
+							<option value="-1">Selecione AquÃ­..</option>
 							<%
 								for (int i = 0; i < ListCargo.size(); i++) {
 									if (ListCargo.get(i).getIdCargo() == myPers
@@ -153,7 +168,7 @@
 					<td align="left"><label>Oficio:</label></td>
 					<td align="left"><select name="idOficio"
 						style="width: 250px" id="idOficio">
-							<option value="-1">Selecione Aquí..</option>
+							<option value="-1">Selecione AquÃ­..</option>
 							<%
 								for (int i = 0; i < ListOficio.size(); i++) {
 									if (ListOficio.get(i).getIdOficio() == myPers
@@ -207,13 +222,11 @@
 				
 				<p class="submit">
 					
-					<button type="submit" onclick="this.form.accion.value='nuevo';">Agregar Personal</button>
+					<button type="submit" onclick="this.form.accion.value='nuevo';" class="btn">Agregar Personal</button>
 				</p>
 				<%
 					}
 				%>
-				<br />
-	<br />
 				<!-- <p class="submit">
 					<button type="submit" onclick="this.form.accion.value='cancel';">Cancelar</button>
 				</p> -->

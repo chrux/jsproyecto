@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="com.clase.dao.OficioDao"%>
 <%@page import="com.clase.models.Oficio"%>
 <%@page import="com.clase.dao.PersonalDao"%>
@@ -12,12 +19,19 @@
 <%@page import="com.clase.models.Usuario"%>
 <%@page import="com.clase.models.Proyecto"%>
 <%@page import="java.text.DecimalFormat"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Personal del Proyecto | ProjectManager</title>
 <%
 DecimalFormat format = new DecimalFormat("###,###.##"); //para formato
 
@@ -25,9 +39,6 @@ DecimalFormat format = new DecimalFormat("###,###.##"); //para formato
 java.util.Date date = new java.util.Date(); 
 java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("dd/MM/yyyy");
 String fecha = sdf.format(date);
-
-//obtener ruta del contexto
-String ruta = request.getContextPath();
 
 Proyecto proy = new Proyecto();
 
@@ -49,14 +60,11 @@ OficioDao servicePosi= new OficioDao();
 String positionName="Prueba";
 int idPosition=0;
 
-
-
 //Datos de la Persona
 Personal myPersona = new Personal();
 PersonalDao servicePersonal = new PersonalDao();
 String NombrePersona="Prueba";
 int idPersona=0;
-
 
 //Para verificar el usuario autenticado
 Usuario user = new Usuario();
@@ -73,7 +81,7 @@ int param=0;
 if (!paramProy.isEmpty())
 {
 	param= Integer.parseInt(paramProy);
-	System.out.println("Entra aquí con Parámetro: " + paramProy);
+	System.out.println("Entra aquÃ­ con ParÃ¡metro: " + paramProy);
 	PersonalProyectoDao servicio = new PersonalProyectoDao();
 	persProy = servicio.findById( param);
 	ListPers = ServiceProy.getLista(param);
@@ -81,29 +89,22 @@ if (!paramProy.isEmpty())
 }
 
 %>
-<link href="<%=ruta%>/css/menu.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/tabs.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=ruta%>/js/tabs.js"></script>
-<script type="text/javascript" src="<%=ruta%>/js/menu.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style3.css" />
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style2.css" />
-<!--[if lt IE 8.]>-->
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie.css" />
-<!--<![endif]-->
-<!--[if lt IE 7.]>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie6.css" />
-<!--<![endif]-->
-<title>Personal Proyecto</title>
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
 </head>
-<body onload="P7_initPM(0,1,0,0,-1)">
+<body>
 <div id="lista">
 <br />
-	<h1>Personal del proyecto</h1>
-	<br />
-
+	<h3 class="no-margin">Personal del proyecto</h3>
 	<hr />
-	<table  border="0" width="100%" class="CssTable">
+	<table class="table table-bordered">
 	<thead>
 				<tr>
 					<th>No.</th>
@@ -160,6 +161,5 @@ if (!paramProy.isEmpty())
 			</tbody>
 	</table>
 </div>
-
 </body>
 </html>
