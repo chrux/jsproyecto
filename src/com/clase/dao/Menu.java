@@ -48,7 +48,7 @@ public class Menu {
 	public String getHijos(String usuario, int padre, String ruta) {
 		String hijos = "";
 
-		String sql = "Select o.url, o.descripcion, os.Usuario from Opcion o " + 
+		String sql = "Select o.idopcion, o.url, o.descripcion, os.Usuario, (select count(idopcion) from Opcion h where h.padre=o.idopcion) hijos from Opcion o " + 
 " inner join opcion_por_usuario os on os.idopcion=o.idopcion " +
 " where o.padre=?  and os.Usuario=? order by o.orden;";
 
@@ -65,9 +65,15 @@ public class Menu {
 
 			hijos = hijos + "<ul class=\"dropdown-menu\">";
 			while (cx.getNext()) {
-				hijos = hijos + "<li><a href=\"" + ruta + "/"
-						+ cx.getString("url") + "\">"
-						+ cx.getString("descripcion") + "</a></li>";
+				if ( cx.getInt("hijos") > 0 ) {
+					hijos += "<li class=\"dropdown-submenu\">";
+					hijos += "<a href=\"#\">" + cx.getString("descripcion") + "</a>";
+					hijos += getHijos(usuario, cx.getInt("idopcion"), ruta);
+				} else {
+					hijos += "<li>";
+					hijos += "<a href=\"" + ruta + "/" + cx.getString("url") + "\">" + cx.getString("descripcion") + "</a>";
+				}
+				hijos += "</li>";
 			}
 			hijos = hijos + "</ul>";
 			cx.cleanup();

@@ -1,27 +1,33 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="com.clase.dao.UsuarioDao"%>
 <%@page import="com.clase.dao.ProyectosDao"%>
 <%@page import="com.clase.models.Proyecto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.clase.models.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Reporte por Proyecto | ProjectManager</title>
 <%
-
-
 //Formato de fechas
 java.util.Date date = new java.util.Date(); 
 java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("dd/MM/yyyy");
-
-//Parámetro de mensaje
-String mensaje = request.getParameter("mensaje");
-
-//obtener ruta del contexto
-String ruta = request.getContextPath();
 
 //Obteniendo el usuario
 Usuario user = new Usuario();
@@ -47,7 +53,7 @@ if (request instanceof HttpServletRequest) {
 config.getServletContext().log(
 		"Ruta: " + name);
 
-//ELIMINA EL CONTEXTO DE LA APLICACIÓN Y EL
+//ELIMINA EL CONTEXTO DE LA APLICACIÃ“N Y EL
 //EL NOMBRE DEL RECURSO COINCIDA CON LA RUTA ESCRITA EN LA TABLA
 name = name.substring(13, name.length());
 
@@ -55,31 +61,24 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 	response.sendRedirect(ruta + "/inicio/home.jsp?mensaje=Permiso no establecido");
 	return;
 }
-
-
 %>
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
 
-
-<link href="<%=ruta%>/css/menu.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/tabs.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=ruta%>/js/tabs.js"></script>
-<script type="text/javascript" src="<%=ruta%>/js/menu.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style3.css" />
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style2.css" />
-<!--[if lt IE 8.]>-->
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie.css" />
-<!--<![endif]-->
-<!--[if lt IE 7.]>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie6.css" />
-<!--<![endif]-->
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
+    
 <SCRIPT Language="JavaScript">
 function f(){
 //var indice=document.getElementById('Proyectos').options.selectedIndex ; //posicion
 var posicion=document.getElementById('Proyectos').options.selectedIndex  ; //posicion
 //var posicion=document.getElementById('Proyectos').option[indice].value  ; //posicion
 var valueS=document.getElementById('Proyectos').options[posicion].value;
-//alert(" Se mostrará el reporte de " + document.getElementById('Proyectos').options[posicion].text + document.getElementById('Proyectos').options[posicion].value ); //valor
+//alert(" Se mostrarÃ¡ el reporte de " + document.getElementById('Proyectos').options[posicion].text + document.getElementById('Proyectos').options[posicion].value ); //valor
 return valueS;
 }
 
@@ -90,10 +89,56 @@ return valueS;
 	} 
 	setTimeout ("redireccionar()", 20000);
 </SCRIPT>
-<title>Reporte de Personal por proyecto</title>
 </head>
-<body onload="P7_initPM(0,1,0,0,-1)">
+<body>
+	<div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+        <jsp:include page="../include/menu.jsp">
+          <jsp:param name="ruta" value="<%=ruta %>"></jsp:param>
+        </jsp:include>
+        </ul>
+        <h3 class="muted">Project Manager</h3>
+      </div>
 
+      <hr>
+      
+	  <div class="form-horizontal">		  
+		  <div class="control-group">
+		    <label class="control-label" for="estado">Estado</label>
+		    <div class="controls">
+		      <select name="Proyectos" id="Proyectos">
+				<option value="-1">Selecione AquÃ­..</option>
+				<%
+					for (int i = 0; i < ListProy.size(); i++) {
+				%> 
+				<option value="<%=ListProy.get(i).getIdProyecto() %>"><%=ListProy.get(i).getNombre()%></option>
+				
+				<%
+					}
+				%>
+			  </select>
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" onclick="redireccionar();" class="btn">Ver Reporte</button>
+		    </div>
+		  </div>
+	  </div>
+
+      <jsp:include page="../include/footer.jsp">
+      	<jsp:param name="ruta" value="<%=ruta%>"></jsp:param>
+      </jsp:include>
+
+    </div> <!-- /container -->
+    
+	<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%= ruta %>/assets/js/jquery.js"></script>
+    <script src="<%= ruta %>/assets/js/bootstrap.js"></script>
+<% /* %>
 <div id="container">
 <div id="header">
 <h1>
@@ -103,7 +148,7 @@ return valueS;
 
 </div>
 <div id="navigation">
-			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar Sesión</a>
+			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar SesiÃ³n</a>
 				</div>
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tbody>
@@ -129,7 +174,7 @@ return valueS;
 	<tr>
 	<td align="right" ><label>Seleccione el Proyecto:</label></td>
 										<td align="left"><select name="Proyectos" id="Proyectos">
-			<option value="-1">Selecione Aquí..</option>
+			<option value="-1">Selecione AquÃ­..</option>
 			<%
 				for (int i = 0; i < ListProy.size(); i++) {
 			%> 
@@ -185,6 +230,6 @@ return valueS;
 
 
 </div>
-
+<% */ %>
 </body>
 </html>
