@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="com.clase.dao.ProyectosDao"%>
 <%@page import="com.clase.models.Proyecto"%>
 <%@page import="com.clase.models.Usuario"%>
@@ -11,17 +18,21 @@
 <%@page import="com.clase.dao.PersonalDao"%>
 <%@page import="com.clase.models.Personal"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Cheques de Proyecto | ProjectManager</title>
 <%
 	Proveedor myProv = new Proveedor(); //cambiar a cheques
-	
-	
-	
 
 	DecimalFormat format = new DecimalFormat("###,###.##"); //para formato
 
@@ -29,9 +40,6 @@
 	java.util.Date date = new java.util.Date();
 	java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
 			"dd/MM/yyyy");
-
-	//obtener ruta del contexto
-	String ruta = request.getContextPath();
 
 	/*Obtener la lista de Proveedores*/
 	ArrayList<Proveedor> ListProveedor = new ArrayList<Proveedor>();
@@ -61,7 +69,7 @@
 		int table=0;
 		try {
 			table =Integer.parseInt(request.getParameter("idProy"));
-			System.out.println("Entra aquí con Parámetro (table) : " + table);
+			System.out.println("Entra aquÃ­ con ParÃ¡metro (table) : " + table);
 		} catch (Exception e) {
 			table = 0;
 		}
@@ -69,14 +77,14 @@
 		
 		try {
 			idCheque = Integer.parseInt(request.getParameter("idCheque"));
-			System.out.println("Entra aquí con Parámetro (idCheque): " + idCheque);
+			System.out.println("Entra aquÃ­ con ParÃ¡metro (idCheque): " + idCheque);
 		} catch (Exception e) {
 			idCheque = 0;
 		}
 		
 		if (table!=0) {
 			param = table;
-			System.out.println("Entra aquí con Parámetro: " + table);
+			System.out.println("Entra aquÃ­ con ParÃ¡metro: " + table);
 			//ProyectosDao servicio = new ProyectosDao();
 			//proy = servicio.findById( param);
 
@@ -84,30 +92,18 @@
 
 		
 		
-	%>
-	<link href="<%=ruta%>/css/_vti_cnf/jquery-ui-timepicker-addon.css"
-	type="text/css" media="all" rel="stylesheet" />
-	<link href="<%=ruta%>/css/_vti_cnf/jquery-ui-1.9.2.custom.css"
-	type="text/css" media="all" rel="stylesheet" />
-<link href="<%=ruta%>/css/menu.css" rel="stylesheet" type="text/css" />
-<script src="<%=ruta%>/js/jquery-1.8.3.js" type="text/javascript"></script>
-<link href="<%=ruta%>/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/tabs.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=ruta%>/js/tabs.js"></script>
-<script type="text/javascript" src="<%=ruta%>/js/menu.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style3.css" />
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style2.css" />
-<!--[if lt IE 8.]>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie.css" />
-<![endif]-->
-<!--[if lt IE 7.]>-->
-<link rel="stylesheet" type="text/css"
-	href="<%=ruta%>/css/style-ie6.css" />
-<!--<![endif]-->
-	
-<title>Agregando Cheques</title>
+%>
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
 </head>
-<body onload="P7_initPM(0,1,0,0,-1)">
+<body>
 <form action="../Cheques.do?" method="post"
 		class="cmxform">
 		<fieldset>
@@ -119,7 +115,7 @@
 		</td>
 		<td align="left"><select name="idProveedor"
 						style="width: 250px" id="idProveedor">
-							<option value="-1">Selecione Aquí..</option>
+							<option value="-1">Selecione AquÃ­..</option>
 							<%
 								for (int i = 0; i < ListProveedor.size(); i++) {
 									if (ListProveedor.get(i).getIdProveedor() == cheque.getIdProveedor()
@@ -145,7 +141,7 @@
 		</td>
 		<td align="left"><select name="idProyecto"
 						style="width: 250px" id="idProyecto">
-							<option value="-1">Selecione Aquí..</option>
+							<option value="-1">Selecione AquÃ­..</option>
 							<%
 								for (int i = 0; i < ListProyecto.size(); i++) {
 									if (ListProyecto.get(i).getIdProyecto() == cheque.getIdProyecto()
@@ -176,14 +172,14 @@
 		</tr>
 		
 		<tr>
-		<td align="left"><label>Fecha Emisión:</label></td>
+		<td align="left"><label>Fecha EmisiÃ³n:</label></td>
 		<td align="left"><input id="fechaEmision" style="width: 247px"
 											name="fechaEmision" type="text" size="10"
 											value="<%=cheque.getFechaEmision() %>" /></td>
 		</tr>
 		
 		<tr>
-		<td align="left"><label>Número de Cheque:</label></td>
+		<td align="left"><label>NÃºmero de Cheque:</label></td>
 		<td align="left"><input id="numCheque" style="width: 247px"
 											name="numCheque" type="text" size="10"
 											value="<%=cheque.getNumCheque() %>" /></td>
@@ -213,11 +209,10 @@
 				
 				<p class="submit">
 					
-					<button type="submit" onclick="this.form.accion.value='nuevo';">Agregar Cheque</button>
+					<button type="submit" onclick="this.form.accion.value='nuevo';" class="btn">Agregar Cheque</button>
 				</p>
 		</fieldset>
 		
 </form>		
-
 </body>
 </html>

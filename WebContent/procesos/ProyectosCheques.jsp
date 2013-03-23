@@ -1,23 +1,34 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="com.clase.dao.UsuarioDao"%>
 <%@page import="com.clase.models.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@page import="com.clase.dao.ProyectosDao"%>
+<%@page import="com.clase.dao.ProyectosDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.clase.models.Proyecto "%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Cheques | ProjectManager</title>
 <%
 ArrayList<Proyecto> ListProy= new ArrayList<Proyecto>(); 
 ProyectosDao ServiceProy= new ProyectosDao();
-String ruta = request.getContextPath();
 Proyecto proy = new Proyecto();
 ListProy = ServiceProy.getLista();
-String mensaje = request.getParameter("mensaje");
 
 Usuario user = new Usuario();
 user = (Usuario) session.getAttribute("usuario");
@@ -34,7 +45,7 @@ if (request instanceof HttpServletRequest) {
 config.getServletContext().log(
 		"Ruta: " + name);
 
-//ELIMINA EL CONTEXTO DE LA APLICACIÓN Y EL
+//ELIMINA EL CONTEXTO DE LA APLICACIÃ“N Y EL
 //EL NOMBRE DEL RECURSO COINCIDA CON LA RUTA ESCRITA EN LA TABLA
 name = name.substring(13, name.length());
 
@@ -44,48 +55,83 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 }
 
 %>
-<link href="<%=ruta%>/css/menu.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/tabs.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=ruta%>/js/tabs.js"></script>
-<script type="text/javascript" src="<%=ruta%>/js/menu.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style3.css" />
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style2.css" />
-<!--[if lt IE 8.]>-->
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie.css" />
-<!--<![endif]-->
-<!--[if lt IE 7.]>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie6.css" />
-<!--<![endif]-->
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
 
-<script>
-	function showCustomer(str) {
-		//alert("Entra aquí");
-	
-		var xmlhttp;
-		if (str == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		}
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-			}
-		}
-		xmlhttp.open("GET", "ListaProyectos.jsp?idProy=" + str +"&show="+0 , true);
-		xmlhttp.send();
-	}
-	
-	</script>
-
-<title>Proyectos</title>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
 </head>
-<body onload="P7_initPM(0,1,0,0,-1)">
+<body>
+	<div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+        <jsp:include page="../include/menu.jsp">
+          <jsp:param name="ruta" value="<%=ruta %>"></jsp:param>
+        </jsp:include>
+        </ul>
+        <h3 class="muted">Project Manager</h3>
+      </div>
+      <hr>
+      <div class="row-fluid">
+      	<div class="span9">
+      		<h3 class="no-margin">Cheques</h3>
+      	</div>
+      	<div class="span3 align-right">
+      		<%-- <a href="<%=ruta %>/procesos/AddProyecto.jsp?show=1" class="btn btn-primary">Nuevo Proyecto</a> --%>
+      	</div>
+      </div>
+      
+      <br />
+      
+      <div>
+      <form class="form-horizontal" action="">
+      	<div class="control-group">
+		    <label class="control-label" for="estado">Proyecto</label>
+		    <div class="controls">
+		      <select name="projects">
+					<option value="">Selecione AquÃ­..</option>
+					<%
+						for (int i = 0; i < ListProy.size(); i++) {
+					%> 
+					<option value="<%=ListProy.get(i).getIdProyecto() %>"><%=ListProy.get(i).getNombre()%></option>
+					
+					<%				}
+					%>
+			  </select>
+		    </div>
+		  </div>
+	  </form>
+	  </div>
+	  
+	  <div id="txtHint">Visualizar los proyectos</div>
+	  
+      <jsp:include page="../include/footer.jsp">
+      	<jsp:param name="ruta" value="<%=ruta%>"></jsp:param>
+      </jsp:include>
+
+    </div> <!-- /container -->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%= ruta %>/assets/js/jquery.js"></script>
+    <script src="<%= ruta %>/assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function () {
+		$("select[name=projects]").change(function () {
+			if ( $(this).val() > 0 ) {
+				$("#txtHint").load("<%= ruta %>/procesos/ListaProyectos.jsp?idProy=" + $(this).val()+"&show=0");
+			} else {
+				$("#txtHint").html("Visualizar los proyectos");
+			}
+		});
+	});
+	</script>
+    <% /* %>
 <div id="container">
 <div id="header">
 			<h1>
@@ -94,7 +140,7 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 			</h1>
 		</div>
 		<div id="navigation">
-			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar Sesión</a>
+			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar SesiÃ³n</a>
 				</div>
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tbody>
@@ -118,7 +164,7 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 	
 <form action="">
 		<select name="customers" onchange="showCustomer(this.value)">
-			<option value="">Selecione Aquí..</option>
+			<option value="">Selecione AquÃ­..</option>
 			<%
 				for (int i = 0; i < ListProy.size(); i++) {
 			%> 
@@ -157,6 +203,6 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 			name="ruta" value="<%=ruta%>"></jsp:param></jsp:include>
 			</div>
 		</div>
-
+	<% */ %>
 </body>
 </html>

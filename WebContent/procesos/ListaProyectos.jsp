@@ -96,7 +96,7 @@ if (!table.isEmpty())
 </head>
 <body>
 <div>
-	<h3>Datos del proyecto <%= show %></h3>
+	<h3>Datos del proyecto</h3>
 	<table class="table table-bordered">
 <thead>
 				<tr>
@@ -128,8 +128,8 @@ if (!table.isEmpty())
 				</td>
 				<% } else {%>
 				<td>
-					&nbsp; <a
-					href="./AddProyecto.jsp?idProy=<%=param%>&show=0">Ver Cheques Proyecto</a> 
+					<a
+					href="./AddProyecto.jsp?idProy=<%=param%>&show=0">Ver Cheques</a> 
 								</td><% }%>
 					</tr>
 				</tbody>

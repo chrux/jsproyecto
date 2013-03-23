@@ -126,7 +126,7 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 	$(document).ready(function () {
 		$("select[name=projects]").change(function () {
 			if ( $(this).val() > 0 ) {
-				$("#txtHint").load("<%= ruta %>/procesos/ListaProyectos.jsp?idProy=" + $(this).val()+"&show="+1);
+				$("#txtHint").load("<%= ruta %>/procesos/ListaProyectos.jsp?idProy=" + $(this).val()+"&show=1");
 			} else {
 				$("#txtHint").html("Visualizar los proyectos");
 			}

@@ -267,10 +267,10 @@ String mensaje = request.getParameter("mensaje");
 		  </div>
 		</form>
       </div>
+      <div>
       <%
 	  if (show == 1) {
 	  %>
-	  <div>
 	  <%
 		if (id != 0) {
 	  %>
@@ -280,7 +280,6 @@ String mensaje = request.getParameter("mensaje");
 	  <%
 	    }
 	  %>
-	  </div>
 	  <%
 	  } else {
 	  %>
@@ -291,13 +290,15 @@ String mensaje = request.getParameter("mensaje");
 		<jsp:include page="../procesos/ListaCheques.jsp">
 			<jsp:param value="<%=id%>" name="idProy" />
 		</jsp:include>
-	  </div>
 	  <%
 		}
 	  }
+      %>
+      </div>
+      <div>
+      <%
 	  if (show == 1) {
 	  %>
-	  <div id="detalle">
 	  <%
 	  	if (id != 0) {
 	  %>
@@ -307,11 +308,9 @@ String mensaje = request.getParameter("mensaje");
 	  <%
 	    }
 	  %>
-	  </div>
 	  <%
 	  } else {
 	  %>
-	  <div id="detalle">
 	  <%
 	  	if (id != 0) {
 	  %>
@@ -321,10 +320,10 @@ String mensaje = request.getParameter("mensaje");
 	  <%
 		}
 	  %>
-	  </div>
 	  <%
 	  }
-	  %>	
+	  %>
+	  </div>	
 	  <%	  
 	  if (show == 1) {
 	  %>
@@ -332,7 +331,7 @@ String mensaje = request.getParameter("mensaje");
 	  <%
 	  } else {
 	  %>
-	  <a href="<%= ruta %>/procesos/ProyectosCheques.jsp" class="btn">Cheques</a>
+	  <a href="<%= ruta %>/procesos/ProyectosCheques.jsp" class="btn">Regresar</a>
 	  <%
 	  }
 	  %>
