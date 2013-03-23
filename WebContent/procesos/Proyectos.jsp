@@ -66,29 +66,6 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
     <!--[if lt IE 9]>
     <script src="<%= ruta %>/assets/js/modernizr.js"></script>
  	<![endif]-->
-	<script type="text/javascript">
-	function showCustomer(str) {
-		//alert("Entra aquí");
-	
-		var xmlhttp;
-		if (str == "") {
-			document.getElementById("txtHint").innerHTML = "";
-			return;
-		}
-		if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-			xmlhttp = new XMLHttpRequest();
-		} else {// code for IE6, IE5
-			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmlhttp.onreadystatechange = function() {
-			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-			}
-		}
-		xmlhttp.open("GET", "ListaProyectos.jsp?idProy=" + str+"&show="+1, true);
-		xmlhttp.send();
-	}
-	</script>
 </head>
 <body>
 	<div class="container-narrow">
@@ -117,7 +94,7 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
       	<div class="control-group">
 		    <label class="control-label" for="estado">Proyecto</label>
 		    <div class="controls">
-		      <select name="customers" onchange="showCustomer(this.value)">
+		      <select name="projects">
 					<option value="">Selecione Aquí..</option>
 					<%
 						for (int i = 0; i < ListProy.size(); i++) {
@@ -145,5 +122,16 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="<%= ruta %>/assets/js/jquery.js"></script>
     <script src="<%= ruta %>/assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function () {
+		$("select[name=projects]").change(function () {
+			if ( $(this).val() > 0 ) {
+				$("#txtHint").load("<%= ruta %>/procesos/ListaProyectos.jsp?idProy=" + $(this).val()+"&show="+1);
+			} else {
+				$("#txtHint").html("Visualizar los proyectos");
+			}
+		});
+	});
+	</script>
 </body>
 </html>

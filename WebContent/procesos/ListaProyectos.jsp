@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.clase.dao.ClienteDao"%>
 <%@page import="com.clase.models.Cliente"%>
@@ -6,22 +13,25 @@
 <%@page import="com.clase.dao.ProyectosDao"%>
 <%@page import="com.clase.models.Proyecto"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Proyecto | ProjectManager</title>
 <%
 DecimalFormat format = new DecimalFormat("###,###.##"); //para formato
 
 //Formato de fechas
 java.util.Date date = new java.util.Date(); 
 java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("dd/MM/yyyy");
-
-//obtener ruta del contexto
-String ruta = request.getContextPath();
 
 //Variables para los datos de proyecto
 ArrayList <Proyecto > ListProy= new ArrayList<Proyecto>(); 
@@ -32,9 +42,6 @@ ListProy = ServiceProy.getLista();
 //Variables para cliente
 Cliente client= new Cliente();
 ClienteDao serviceClient = new ClienteDao();
-
-//para obtener el mensaje en pantalla
-String mensaje = request.getParameter("mensaje");
 
 //Para verificar el usuario autenticado
 Usuario user = new Usuario();
@@ -60,7 +67,7 @@ String clientName="PRUEBA";
 if (!table.isEmpty())
  {
 	 param= Integer.parseInt(table);
-	System.out.println("Entra aquí con Parámetro: " + table);
+	System.out.println("Entra aquÃ­ con ParÃ¡metro: " + table);
 	ProyectosDao servicio = new ProyectosDao();
 	proy = servicio.findById( param);
 	ListProy = ServiceProy.getLista();
@@ -72,44 +79,34 @@ if (!table.isEmpty())
 		client=serviceClient.findById(idClient);
 		
 		clientName= client.getNombre();
-		System.out.println("Entró, nombre es: " + client);
+		System.out.println("EntrÃ³, nombre es: " + client);
 	}
 }
 
 %>
-<link href="<%=ruta%>/css/menu.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/tabs.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=ruta%>/js/tabs.js"></script>
-<script type="text/javascript" src="<%=ruta%>/js/menu.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style3.css" />
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style2.css" />
-<!--[if lt IE 8.]>-->
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie.css" />
-<!--<![endif]-->
-<!--[if lt IE 7.]>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie6.css" />
-<!--<![endif]-->
-<title>Lista Proyectos</title>
-</head>
-<body onload="P7_initPM(0,1,0,0,-1)">
-<div id="lista">
-<br />
-	<h1>Datos del proyecto</h1>
-	<br />
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
 
-	<br />
-	<hr />
-<table  border="0" width="100%" class="CssTable">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div>
+	<h3>Datos del proyecto <%= show %></h3>
+	<table class="table table-bordered">
 <thead>
 				<tr>
 					<th>No.</th>
-					<th>Nombre de Proyecto</th>
-					<% if(show==1){ %><th>Monto de Presupuesto</th><% }%>
+					<th>Nombre</th>
+					<% if(show==1){ %><th>Presupuesto</th><% }%>
 					<th>Observaciones</th>
 					<% if(show==1){ %><th>Cliente</th><% }%>
-					<% if(show==1){ %><th>Fecha de Cierre</th><% }%>
-					<th>Opciones</th>
+					<% if(show==1){ %><th>Cierre</th><% }%>
+					<th width="80">Opciones</th>
 					<%-- <% if(table.equals("2")) {%>
 					<th>Precio</th>
 					<%} %> --%>
@@ -124,8 +121,8 @@ if (!table.isEmpty())
 			<% if(show==1){ %><td><%=clientName%></td><% }%>
 			<% if(show==1){ %><td><%=sdf.format(proy.getFechaCierre()) %></td><% }%>
 			<% if(show==1){ %><td>
-					&nbsp; <a
-					href="./AddProyecto.jsp?idProy=<%=param%>&show=1">Editar</a> 
+					<a
+					href="./AddProyecto.jsp?idProy=<%=param%>&show=1">Edit</a> 
 						&nbsp; <a 
 						href="../AddProyecto.do?accion=del&idProy=<%=param%>">Delete</a>
 				</td>
@@ -136,7 +133,7 @@ if (!table.isEmpty())
 								</td><% }%>
 					</tr>
 				</tbody>
-</table>
-	</div>
+	</table>
+</div>
 </body>
 </html>
