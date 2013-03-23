@@ -1,17 +1,31 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+<%@ page language="java"
+	  contentType="text/html; charset=utf-8"
+	 pageEncoding="utf-8"%>
+<%
+String ruta = request.getContextPath();
+String mensaje = request.getParameter("mensaje");
+%>
 <%@page import="com.clase.dao.UsuarioDao"%>
 <%@page import="com.clase.models.Usuario"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 <%@page import="com.clase.dao.MacGregorDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.clase.models.TipoCliente "%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head lang="es">
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+	<title>Tipo de Clientes | ProjectManager</title>
 <%
 	TipoCliente myClientTy = new TipoCliente();
-	String mensaje = request.getParameter("mensaje");
 	int id = 0;
 	try {
 		id = Integer.parseInt(request.getParameter("Id_Tipo_Cliente"));
@@ -24,7 +38,6 @@
 		myClientTy = servicio.findByIDType(id);
 	}
 	
-	String ruta = request.getContextPath();
 	Usuario user = new Usuario();
 	user = (Usuario) session.getAttribute("usuario");
 
@@ -43,132 +56,81 @@
 
 	
 %>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link href="<%=ruta%>/css/menu.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/style.css" rel="stylesheet" type="text/css" />
-<link href="<%=ruta%>/css/tabs.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="<%=ruta%>/js/tabs.js"></script>
-<script type="text/javascript" src="<%=ruta%>/js/menu.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style3.css" />
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style2.css" />
-<!--[if lt IE 8.]>
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie.css" />
-<![endif]-->
-<!--[if lt IE 7.]>-->
-<link rel="stylesheet" type="text/css" href="<%=ruta%>/css/style-ie6.css" />
-<!--<![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" href="css/screen.css" media="screen" />
-<title>Agregar Tipo de Cliente</title>
-</head>
-<body onload="P7_initPM(0,1,0,0,-1)">
-	<div id="Container" style="width: 1000px; background-color:#fff; " >
-	<div id="header">
-			<h1 style="color:#033C24;" >
-				Usuario:
-				<%=user.getNombre()%>
-			</h1>
-		</div>
-		<div id="navigation">
-			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar Sesión</a>
-				</div>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tbody>
-<tr>
-<td id="leftcontent" nowrap="nowrap" valign="top" width="190">
-					<div class="bar">
-						<img src="<%=ruta%>/images/hr_dots1.gif" alt="" height="3" width="150" />
-					</div> <!-- ** Menu Start ** //--> <jsp:include
-						page="../include/menu.jsp"><jsp:param name="ruta" value="<%=ruta %>"></jsp:param></jsp:include> <!-- ** Menu End ** //-->
+	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
 
-				</td>
-<td valign="top" width="100%">
-	<% if(mensaje!=null) {%>
-	<p style="color: red;"><%=mensaje %></p>
-	<%} %>
-	<br />
-	<br />
-		<form action="../AddTipoCliente.do" method="post" id="formX" style="background-color:#fff;color:#033C24;width:'100%';">
-			<h1>
-				<span>Agregar Tipo de Cliente</span>
-			</h1>
-			<fieldset>
-				<legend> Agregar Tipo de Cliente</legend>
-				<table width="50%">
-				<tr>
-				<td align="left">
-				<label>Tipo de Cliente:</label>
-				</td>
-				<td align="left">
-				<input id="tipoCliente" name="tipoCliente" style="width:125px" type="text"
-						size="10" value="<%=myClientTy.getTipoCliente() %>" /><br />
-				</td>
-				</tr>
-				<tr>
-				<td align="left"><label>Estado:</label>
-				</td>
-				<td align="left"><select name="estado" style="width:128px" id="estado">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="<%= ruta %>/assets/js/modernizr.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+        <jsp:include page="../include/menu.jsp">
+          <jsp:param name="ruta" value="<%=ruta %>"></jsp:param>
+        </jsp:include>
+        </ul>
+        <h3 class="muted">Project Manager</h3>
+      </div>
+
+      <hr>
+		
+	  <div class="row-fluid">
+      	<div class="span9">
+      		<h3 class="no-margin"><% if (id != 0) { %>Editar<% } else { %>Nuevo<% } %> Tipo de Cliente</h3>
+      	</div>
+      	<div class="span3 align-right">
+      		&nbsp;
+      	</div>
+      </div>
+      
+      <div>
+      <form class="form-horizontal" action="<%= ruta %>/AddTipoCliente.do">
+      	  <% if (id != 0) { %>
+      	  <input type="hidden" id="Id_Tipo_Cliente" name="Id_Tipo_Cliente" value="<%=id%>" />
+      	  <input type="hidden" id="accion" name="accion" value="edit" />
+      	  <% } else { %>
+      	  <input type="hidden" id="accion" name="accion" value="nuevo" />
+      	  <% } %>
+		  <div class="control-group">
+		    <label class="control-label" for="tipoCliente">Nombre</label>
+		    <div class="controls">
+		      <input type="text" id="tipoCliente" name="tipoCliente" value="<%=myClientTy.getTipoCliente() %>" placeholder="Nombre del Tipo de Cliente">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="estado">Estado</label>
+		    <div class="controls">
+		      <select name="estado" style="width:128px" id="estado">
 		 		<option value="1" <% if (myClientTy.getEstado().contains("1")){ %> selected="selected"<% } %> >Activo</option>
 		 		<option value="0" <% if (myClientTy.getEstado().contains("0")){ %> selected="selected"<% } %> >Inactivo</option>
-		 		</select>
-				</td>
-				</tr>
-				</table>
-				
-				<p class="first">
-					
-				</p>
-				<p>
-					
-					
-					<%-- <input id="estado" name="estado"
-						type="text" size="10" value="<%=myClientTy.getEstado() %>" /> --%><br />
-				</p>
-				<input type="hidden" id="accion" name="accion" value="" />
-				
-				<br />
-	<br />
-				<%
-					if (id != 0) {
-				%>
-				
-				 <input
-					type="hidden" id="Id_Tipo_Cliente" name="Id_Tipo_Cliente" value="<%=id%>" />
-				<p class="submit">
-					<button type="submit" onclick="this.form.accion.value='edit';">Editar Tipo de Cliente</button>
-				</p>
-				<%
-					} else {
-				%>
-				
-				<p class="submit">
-					
-					<button type="submit" onclick="this.form.accion.value='nuevo';">Agregar Tipo de Cliente</button>
-				</p>
-				<%
-					}
-				%>
-				<br />
-	<br />
-	<p class="submit">
-					<button type="submit" onclick="this.form.accion.value='cancel';">Cancelar</button>
-				</p>
-				<br />
-	<br />
-			</fieldset>
-			<br />
-	<br /><br />
-	<br />
+		 	  </select>
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn btn-primary">Guardar</button>
+		      <a href="<%= ruta %>/catalogos/TipoClientes.jsp" class="btn">Cancelar</a>
+		    </div>
+		  </div>
 		</form>
-			</td>
-		</tr>
-		</tbody>
-		</table>
-		<div id="footer">
-			<jsp:include page="../include/footer.jsp"><jsp:param
-			name="ruta" value="<%=ruta%>"></jsp:param></jsp:include>
-			</div>
-	</div>
+      </div>
+	
 
+      <jsp:include page="../include/footer.jsp">
+      	<jsp:param name="ruta" value="<%=ruta%>"></jsp:param>
+      </jsp:include>
+
+    </div> <!-- /container -->
+    
+	<!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%= ruta %>/assets/js/jquery.js"></script>
+    <script src="<%= ruta %>/assets/js/bootstrap.js"></script>
 </body>
 </html>

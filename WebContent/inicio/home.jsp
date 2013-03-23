@@ -41,16 +41,12 @@ String mensaje = request.getParameter("mensaje");
     <![endif]-->
 </head>
 <body>
-<div class="container-narrow">
-
+	<div class="container-narrow">
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
         <jsp:include page="../include/menu.jsp">
           <jsp:param name="ruta" value="<%=ruta %>"></jsp:param>
         </jsp:include>
-          <%-- <li class="active"><a href="<%= ruta %>/inicio/home.jsp">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li> --%>
         </ul>
         <h3 class="muted">Project Manager</h3>
       </div>
