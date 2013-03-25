@@ -251,9 +251,9 @@ String mensaje = request.getParameter("mensaje");
 		    </div>
 		  </div>
 		  <div class="control-group">
-		    <label class="control-label" for="Estado">Estado</label>
+		    <label class="control-label" for="estado">Estado</label>
 		    <div class="controls">
-		      <select name="Estado" style="width: 250px" id="Estado">
+		      <select name="estado" style="width: 250px" id="estado">
 				<option value="1" <%if (myProy.getEstado().contains("1")) {%> selected="selected" <%}%>>Activo</option>
 				<option value="0" <%if (myProy.getEstado().contains("0")) {%> selected="selected" <%}%>>Inactivo</option>
 			  </select>
