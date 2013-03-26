@@ -18,7 +18,7 @@ public class OficioDao {
 	
 	public ArrayList<Oficio> getLista() {
 		ArrayList<Oficio> Lista = new ArrayList<Oficio>();
-		String q = "select * from oficio order by Id_Oficio;";
+		String q = "select * from oficio order by id_oficio;";
 
 		ConnDB cx = new ConnDB();
 		try {
@@ -26,9 +26,9 @@ public class OficioDao {
 			while (cx.getNext()) {
 				Oficio ofici = new Oficio();
 				
-				ofici.setIdOficio(cx.getInt("Id_Oficio"));
-				ofici.setOficio(cx.getString("Oficio"));
-				ofici.setEstado(cx.getString("Estado"));
+				ofici.setIdOficio(cx.getInt("id_oficio"));
+				ofici.setOficio(cx.getString("oficio"));
+				ofici.setEstado(cx.getString("estado"));
 				
 				Lista.add(ofici);
 			}
@@ -44,7 +44,7 @@ public class OficioDao {
 		Oficio oficio = new Oficio();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from oficio where Id_Oficio=?;";
+		String sql = "Select * from oficio where id_oficio=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -53,9 +53,9 @@ public class OficioDao {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				oficio.setIdOficio(cx.getInt("Id_Oficio"));
-				oficio.setOficio(cx.getString("Oficio"));		
-				oficio.setEstado(cx.getString("Estado"));
+				oficio.setIdOficio(cx.getInt("id_oficio"));
+				oficio.setOficio(cx.getString("oficio"));		
+				oficio.setEstado(cx.getString("estado"));
 				
 			}
 			cx.cleanup();

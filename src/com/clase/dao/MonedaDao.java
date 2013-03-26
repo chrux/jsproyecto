@@ -13,7 +13,7 @@ public class MonedaDao {
 		
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * From moneda where Id_Moneda=?;";
+		String sql = "Select * From moneda where id_moneda=?;";
 		System.out.println("Entra a la sentencia: " + sql + id);
 
 		try {
@@ -24,8 +24,8 @@ public class MonedaDao {
 
 			while (cx.getNext()) {
 				myMoneda.setIdMoneda(id);
-				myMoneda.setNombreMoneda(cx.getString("Nombre_Moneda"));
-				myMoneda.setEstado(cx.getString("Estado"));
+				myMoneda.setNombreMoneda(cx.getString("nombre_moneda"));
+				myMoneda.setEstado(cx.getString("estado"));
 			}
 			cx.cleanup();
 
@@ -42,16 +42,16 @@ public class MonedaDao {
 	 **/
 	public ArrayList<Moneda> getLista() {
 		ArrayList<Moneda> Lista = new ArrayList<Moneda>();
-		String q = "select * from moneda order by Id_Moneda;";
+		String q = "select * from moneda order by id_moneda;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 				Moneda myMoney = new Moneda();
-				myMoney.setIdMoneda(cx.getInt("Id_Moneda"));
-				myMoney.setNombreMoneda(cx.getString("Nombre_Moneda"));
-				myMoney.setEstado(cx.getString("Estado"));
+				myMoney.setIdMoneda(cx.getInt("id_moneda"));
+				myMoney.setNombreMoneda(cx.getString("nombre_moneda"));
+				myMoney.setEstado(cx.getString("estado"));
 				
 				Lista.add(myMoney);
 			}

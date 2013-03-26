@@ -15,10 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`bd_mcgregor` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `bd_mcgregor`;
-
 --
 -- Table structure for table `banco`
 --
@@ -27,12 +23,12 @@ DROP TABLE IF EXISTS `banco`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `banco` (
-  `Id_Banco` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_Banco` varchar(70) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Banco`),
-  UNIQUE KEY `Nombre_Banco` (`Nombre_Banco`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `id_banco` int(11) NOT NULL DEFAULT '0',
+  `nombre_banco` varchar(70) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_banco`),
+  UNIQUE KEY `Nombre_Banco` (`nombre_banco`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,12 +82,12 @@ DROP TABLE IF EXISTS `cargo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cargo` (
-  `Id_Cargo` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_Cargo` varchar(50) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Cargo`),
-  UNIQUE KEY `Nombre_Cargo` (`Nombre_Cargo`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `id_cargo` int(11) NOT NULL DEFAULT '0',
+  `nombre_cargo` varchar(50) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_cargo`),
+  UNIQUE KEY `Nombre_Cargo` (`nombre_cargo`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,22 +108,22 @@ DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `clientes` (
-  `Id_Clientes` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Tipo_Cliente` int(11) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Contacto` varchar(50) NOT NULL,
-  `Direccion_Postal` varchar(20) NOT NULL,
-  `Direccion` varchar(100) NOT NULL,
-  `Telefono` varchar(50) NOT NULL,
-  `E_mail` varchar(64) NOT NULL,
-  `Nacionalidad` char(15) NOT NULL,
-  `Pagina_Web` varchar(40) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Clientes`),
-  UNIQUE KEY `Nombre` (`Nombre`,`Estado`),
-  KEY `FK_Tipo_Cliente` (`Id_Tipo_Cliente`),
+  `id_clientes` int(11) NOT NULL DEFAULT '0',
+  `id_tipo_cliente` int(11) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `contacto` varchar(50) DEFAULT NULL,
+  `direccion_postal` varchar(20) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `telefono` varchar(50) DEFAULT NULL,
+  `e_mail` varchar(64) DEFAULT NULL,
+  `nacionalidad` char(15) DEFAULT NULL,
+  `pagina_web` varchar(40) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_clientes`),
+  UNIQUE KEY `Nombre` (`nombre`,`estado`),
+  KEY `FK_Tipo_Cliente` (`id_tipo_cliente`),
   CONSTRAINT `FK_Tipo_Cliente` FOREIGN KEY (`Id_Tipo_Cliente`) REFERENCES `tipo_cliente` (`Id_Tipo_Cliente`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,16 +144,16 @@ DROP TABLE IF EXISTS `cuentas_bancos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cuentas_bancos` (
-  `Id_Cuenta` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Banco` int(11) NOT NULL,
-  `Id_Moneda` int(11) NOT NULL,
-  `Numero_Cuenta` decimal(15,0) NOT NULL,
-  `Estado` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`Id_Cuenta`),
-  UNIQUE KEY `Numero_Cuenta` (`Numero_Cuenta`),
-  KEY `Id_Banco` (`Id_Banco`),
-  KEY `Id_Moneda` (`Id_Moneda`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `id_cuenta` int(11) NOT NULL DEFAULT '0',
+  `id_banco` int(11) DEFAULT NULL,
+  `id_moneda` int(11) DEFAULT NULL,
+  `numero_cuenta` decimal(15,0) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_cuenta`),
+  UNIQUE KEY `Numero_Cuenta` (`numero_cuenta`),
+  KEY `Id_Banco` (`id_banco`),
+  KEY `Id_Moneda` (`id_moneda`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -178,25 +174,25 @@ DROP TABLE IF EXISTS `ejecucion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ejecucion` (
-  `Id_Ejecucion` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Tasa_Cambio` int(11) NOT NULL,
-  `Id_Proveedor` int(11) NOT NULL,
-  `Id_Proyecto` int(11) DEFAULT NULL,
-  `Id_Cuentas_Bancos` int(11) NOT NULL,
-  `Monto` double NOT NULL,
-  `Fecha_Emision` date NOT NULL,
-  `Numero_Cheque` int(10) unsigned NOT NULL,
-  `ImagenCheque` blob,
-  `Concepto` varchar(150) DEFAULT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Ejecucion`),
-  UNIQUE KEY `Numero_Cheque` (`Numero_Cheque`,`Fecha_Emision`),
-  UNIQUE KEY `Numero_Cheque_2` (`Numero_Cheque`,`Id_Cuentas_Bancos`),
-  KEY `Id_Cuentas_Bancos` (`Id_Cuentas_Bancos`),
-  KEY `Id_Proveedor` (`Id_Proveedor`),
-  KEY `Id_Tasa_Cambio` (`Id_Tasa_Cambio`),
-  KEY `Id_Proyecto` (`Id_Proyecto`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+  `id_ejecucion` int(11) NOT NULL DEFAULT '0',
+  `id_tasa_cambio` int(11) DEFAULT NULL,
+  `id_proveedor` int(11) DEFAULT NULL,
+  `id_proyecto` int(11) DEFAULT NULL,
+  `id_cuentas_bancos` int(11) DEFAULT NULL,
+  `monto` double DEFAULT NULL,
+  `fecha_emision` date DEFAULT NULL,
+  `numero_cheque` int(10) unsigned DEFAULT NULL,
+  `imagencheque` blob,
+  `concepto` varchar(150) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_ejecucion`),
+  UNIQUE KEY `Numero_Cheque` (`numero_cheque`,`fecha_emision`),
+  UNIQUE KEY `Numero_Cheque_2` (`numero_cheque`,`id_cuentas_bancos`),
+  KEY `Id_Cuentas_Bancos` (`id_cuentas_bancos`),
+  KEY `Id_Proveedor` (`id_proveedor`),
+  KEY `Id_Tasa_Cambio` (`id_tasa_cambio`),
+  KEY `Id_Proyecto` (`id_proyecto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,12 +243,12 @@ DROP TABLE IF EXISTS `moneda`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `moneda` (
-  `Id_Moneda` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_Moneda` varchar(20) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Moneda`),
-  UNIQUE KEY `Nombre_Moneda` (`Nombre_Moneda`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `id_moneda` int(11) NOT NULL DEFAULT '0',
+  `nombre_moneda` varchar(20) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_moneda`),
+  UNIQUE KEY `Nombre_Moneda` (`nombre_moneda`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,12 +310,12 @@ DROP TABLE IF EXISTS `oficio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `oficio` (
-  `Id_Oficio` int(11) NOT NULL AUTO_INCREMENT,
-  `Oficio` varchar(50) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Oficio`),
-  UNIQUE KEY `Oficio` (`Oficio`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `id_oficio` int(11) NOT NULL DEFAULT '0',
+  `oficio` varchar(50) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_oficio`),
+  UNIQUE KEY `Oficio` (`oficio`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,12 +336,12 @@ DROP TABLE IF EXISTS `opcion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `opcion` (
-  `idOpcion` int(11) NOT NULL,
+  `idopcion` int(11) NOT NULL DEFAULT '0',
   `descripcion` varchar(120) DEFAULT NULL,
   `url` varchar(120) DEFAULT NULL,
   `padre` int(11) DEFAULT NULL,
   `orden` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idOpcion`)
+  PRIMARY KEY (`idopcion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -367,10 +363,10 @@ DROP TABLE IF EXISTS `opcion_por_usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `opcion_por_usuario` (
-  `OpcionUserId` int(11) NOT NULL,
-  `idOpcion` int(11) DEFAULT NULL,
-  `Usuario` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`OpcionUserId`)
+  `opcionuserid` int(11) NOT NULL DEFAULT '0',
+  `idopcion` int(11) DEFAULT NULL,
+  `usuario` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`opcionuserid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -392,25 +388,25 @@ DROP TABLE IF EXISTS `personal`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `personal` (
-  `Id_Personal` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Tipo_Personal` int(11) NOT NULL,
-  `Id_Oficio` int(11) NOT NULL,
-  `Id_Tipo_Identificacion` int(11) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Cedula` varchar(50) NOT NULL,
-  `Nacional` tinyint(1) NOT NULL,
-  `Estado_Civil` tinyint(1) NOT NULL,
-  `Direccion` varchar(100) NOT NULL,
-  `Genero` tinyint(1) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Personal`),
-  UNIQUE KEY `Cedula` (`Cedula`,`Id_Tipo_Identificacion`) USING BTREE,
-  KEY `Id_Tipo_Personal` (`Id_Tipo_Personal`),
-  KEY `FK_Tipo_Identificacion` (`Id_Tipo_Identificacion`),
-  KEY `Id_Oficio` (`Id_Oficio`) USING BTREE,
+  `id_personal` int(11) NOT NULL DEFAULT '0',
+  `id_tipo_personal` int(11) DEFAULT NULL,
+  `id_oficio` int(11) DEFAULT NULL,
+  `id_tipo_identificacion` int(11) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `cedula` varchar(50) DEFAULT NULL,
+  `nacional` tinyint(1) DEFAULT NULL,
+  `estado_civil` tinyint(1) DEFAULT NULL,
+  `direccion` varchar(100) DEFAULT NULL,
+  `genero` tinyint(1) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_personal`),
+  UNIQUE KEY `Cedula` (`cedula`,`id_tipo_identificacion`) USING BTREE,
+  KEY `Id_Tipo_Personal` (`id_tipo_personal`),
+  KEY `FK_Tipo_Identificacion` (`id_tipo_identificacion`),
+  KEY `Id_Oficio` (`id_oficio`) USING BTREE,
   CONSTRAINT `FK_Tipo_Identificacion` FOREIGN KEY (`Id_Tipo_Identificacion`) REFERENCES `tipo_identificacin` (`Id_Tipo_Identificacin`) ON UPDATE CASCADE,
   CONSTRAINT `FK_Tipo_Personal` FOREIGN KEY (`Id_Tipo_Personal`) REFERENCES `tipo_personal` (`Id_Tipo_Personal`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -431,20 +427,20 @@ DROP TABLE IF EXISTS `personal_proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `personal_proyecto` (
-  `Id_Personal_Proyecto` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Personal` int(11) NOT NULL,
-  `Id_Cargo` int(11) NOT NULL,
-  `Id_Oficio` int(11) NOT NULL,
-  `Fecha_Inicio` date NOT NULL,
-  `Fecha_Final` date NOT NULL,
-  `Id_Proyecto` int(11) NOT NULL,
-  PRIMARY KEY (`Id_Personal_Proyecto`),
-  UNIQUE KEY `Id_Personal_Proyecto` (`Id_Personal_Proyecto`,`Id_Cargo`),
-  KEY `Id_Personal` (`Id_Personal`),
-  KEY `Id_Personal_Proyecto_2` (`Id_Personal_Proyecto`),
-  KEY `FK_Cargo` (`Id_Cargo`),
+  `id_personal_proyecto` int(11) NOT NULL DEFAULT '0',
+  `id_personal` int(11) DEFAULT NULL,
+  `id_cargo` int(11) DEFAULT NULL,
+  `id_oficio` int(11) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_final` date DEFAULT NULL,
+  `id_proyecto` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_personal_proyecto`),
+  UNIQUE KEY `Id_Personal_Proyecto` (`id_personal_proyecto`,`id_cargo`),
+  KEY `Id_Personal` (`id_personal`),
+  KEY `Id_Personal_Proyecto_2` (`id_personal_proyecto`),
+  KEY `FK_Cargo` (`id_cargo`),
   CONSTRAINT `FK_Cargo` FOREIGN KEY (`Id_Cargo`) REFERENCES `cargo` (`Id_Cargo`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,21 +461,21 @@ DROP TABLE IF EXISTS `proveedor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `proveedor` (
-  `Id_Proveedor` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Tipo_Proveedor` int(11) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Contacto` varchar(50) NOT NULL,
-  `Telefono` int(11) NOT NULL,
-  `Direccion_Postal` varchar(20) NOT NULL,
-  `Pagina_Web` varchar(50) DEFAULT NULL,
-  `RUC` varchar(40) NOT NULL,
-  `E_mail` varchar(35) DEFAULT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Proveedor`),
-  UNIQUE KEY `NombreProveedor` (`Nombre`) USING BTREE,
-  KEY `Id_Tipo_Proveedor` (`Id_Tipo_Proveedor`),
+  `id_proveedor` int(11) NOT NULL DEFAULT '0',
+  `id_tipo_proveedor` int(11) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `contacto` varchar(50) DEFAULT NULL,
+  `telefono` int(11) DEFAULT NULL,
+  `direccion_postal` varchar(20) DEFAULT NULL,
+  `pagina_web` varchar(50) DEFAULT NULL,
+  `ruc` varchar(40) DEFAULT NULL,
+  `e_mail` varchar(35) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_proveedor`),
+  UNIQUE KEY `NombreProveedor` (`nombre`) USING BTREE,
+  KEY `Id_Tipo_Proveedor` (`id_tipo_proveedor`),
   CONSTRAINT `FK_Tipo_Proveedor` FOREIGN KEY (`Id_Tipo_Proveedor`) REFERENCES `tipo_proveedor` (`Id_Tipo_Proveedor`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,36 +496,36 @@ DROP TABLE IF EXISTS `proyecto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `proyecto` (
-  `Id_Proyecto` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Tipo_Oferta` int(11) NOT NULL,
-  `Id_Cliente` int(11) NOT NULL,
-  `Nombre` varchar(50) NOT NULL,
-  `Fecha_de_Oferta` date DEFAULT NULL,
-  `Monto_Oferta` double unsigned NOT NULL,
-  `Fecha_Aceptacion` date DEFAULT NULL,
-  `Numero_Oferta` int(11) NOT NULL,
-  `Fecha_Presupuesto` date DEFAULT NULL,
-  `Monto_Presupuesto` double unsigned DEFAULT NULL,
-  `Fecha_Inicio` date DEFAULT NULL,
-  `Fecha_Final` date DEFAULT NULL,
-  `Fecha_Cierre` date DEFAULT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  `Observaciones` varchar(120) DEFAULT NULL,
-  `Fecha_Rechazo` date DEFAULT NULL,
-  `Saldo` double DEFAULT NULL,
-  `Id_Moneda` int(11) NOT NULL,
-  `Estado_Aceptado` tinyint(4) DEFAULT NULL,
-  `Estado_Cerrado` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`Id_Proyecto`),
-  UNIQUE KEY `Nombre` (`Nombre`),
-  UNIQUE KEY `Nombre_2` (`Nombre`,`Numero_Oferta`),
-  KEY `FK_Tipo_Oferta` (`Id_Tipo_Oferta`),
-  KEY `Id_Clientes` (`Id_Cliente`) USING BTREE,
-  KEY `FK_Moned` (`Id_Moneda`),
+  `id_proyecto` int(11) NOT NULL DEFAULT '0',
+  `id_tipo_oferta` int(11) DEFAULT NULL,
+  `id_cliente` int(11) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `fecha_de_oferta` date DEFAULT NULL,
+  `monto_oferta` double unsigned DEFAULT NULL,
+  `fecha_aceptacion` date DEFAULT NULL,
+  `numero_oferta` int(11) DEFAULT NULL,
+  `fecha_presupuesto` date DEFAULT NULL,
+  `monto_presupuesto` double unsigned DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_final` date DEFAULT NULL,
+  `fecha_cierre` date DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  `observaciones` varchar(120) DEFAULT NULL,
+  `fecha_rechazo` date DEFAULT NULL,
+  `saldo` double DEFAULT NULL,
+  `id_moneda` int(11) DEFAULT NULL,
+  `estado_aceptado` tinyint(1) DEFAULT NULL,
+  `estado_cerrado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_proyecto`),
+  UNIQUE KEY `Nombre` (`nombre`),
+  UNIQUE KEY `Nombre_2` (`nombre`,`numero_oferta`),
+  KEY `FK_Tipo_Oferta` (`id_tipo_oferta`),
+  KEY `Id_Clientes` (`id_cliente`) USING BTREE,
+  KEY `FK_Moned` (`id_moneda`),
   CONSTRAINT `FK_Cliente` FOREIGN KEY (`Id_Cliente`) REFERENCES `clientes` (`Id_Clientes`) ON UPDATE CASCADE,
   CONSTRAINT `FK_Moned` FOREIGN KEY (`Id_Moneda`) REFERENCES `moneda` (`Id_Moneda`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_Tipo_Oferta` FOREIGN KEY (`Id_Tipo_Oferta`) REFERENCES `tipo_oferta` (`Id_Tipo_Oferta`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -550,16 +546,16 @@ DROP TABLE IF EXISTS `tasa_de_cambio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tasa_de_cambio` (
-  `Id_Tasa_Cambio` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Moneda` int(11) NOT NULL,
-  `Estado` int(11) NOT NULL,
-  `Cambio` double NOT NULL,
-  `Fecha` date NOT NULL,
-  PRIMARY KEY (`Id_Tasa_Cambio`),
-  UNIQUE KEY `Id_Moneda` (`Id_Moneda`,`Fecha`),
-  KEY `Id_Moneda_2` (`Id_Moneda`),
+  `id_tasa_cambio` int(11) NOT NULL DEFAULT '0',
+  `id_moneda` int(11) DEFAULT NULL,
+  `estado` int(11) DEFAULT NULL,
+  `cambio` double DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  PRIMARY KEY (`id_tasa_cambio`),
+  UNIQUE KEY `Id_Moneda` (`id_moneda`,`fecha`),
+  KEY `Id_Moneda_2` (`id_moneda`),
   CONSTRAINT `FK_Moneda` FOREIGN KEY (`Id_Moneda`) REFERENCES `moneda` (`Id_Moneda`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -606,12 +602,12 @@ DROP TABLE IF EXISTS `tipo_cliente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_cliente` (
-  `Id_Tipo_Cliente` int(11) NOT NULL AUTO_INCREMENT,
-  `Tipo_Cliente` varchar(25) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Tipo_Cliente`),
-  UNIQUE KEY `Tipo_Cliente` (`Tipo_Cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `id_tipo_cliente` int(11) NOT NULL DEFAULT '0',
+  `tipo_cliente` varchar(25) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_tipo_cliente`),
+  UNIQUE KEY `Tipo_Cliente` (`tipo_cliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -684,12 +680,12 @@ DROP TABLE IF EXISTS `tipo_oferta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_oferta` (
-  `Id_Tipo_Oferta` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_Oferta` varchar(20) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Id_Tipo_Oferta`),
-  UNIQUE KEY `Nombre_Oferta` (`Nombre_Oferta`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `id_tipo_oferta` int(11) NOT NULL DEFAULT '0',
+  `nombre_oferta` varchar(20) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id_tipo_oferta`),
+  UNIQUE KEY `Nombre_Oferta` (`nombre_oferta`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -814,21 +810,21 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuario` (
-  `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `Id_Tipo_Usuario` int(11) NOT NULL,
-  `Nombre_Usuario` varchar(50) NOT NULL,
-  `Contrasena` varchar(25) CHARACTER SET utf8 NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
-  `Id_Personal` int(11) NOT NULL,
-  `Nombre` varchar(120) DEFAULT NULL,
-  PRIMARY KEY (`Id_Usuario`),
-  UNIQUE KEY `Id_Usuario` (`Id_Usuario`),
-  UNIQUE KEY `Nombre_Usuario` (`Nombre_Usuario`),
-  KEY `Id_Tipo_Usuario` (`Id_Tipo_Usuario`),
-  KEY `FK_Id_Personal` (`Id_Personal`),
+  `id_usuario` int(11) NOT NULL DEFAULT '0',
+  `id_tipo_usuario` int(11) DEFAULT NULL,
+  `nombre_usuario` varchar(48) DEFAULT NULL,
+  `contrasena` varchar(32) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
+  `id_personal` int(11) DEFAULT NULL,
+  `nombre` varchar(120) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `Id_Usuario` (`id_usuario`),
+  UNIQUE KEY `Nombre_Usuario` (`nombre_usuario`),
+  KEY `Id_Tipo_Usuario` (`id_tipo_usuario`),
+  KEY `FK_Id_Personal` (`id_personal`),
   CONSTRAINT `FK_Id_Personal` FOREIGN KEY (`Id_Personal`) REFERENCES `personal` (`Id_Personal`),
   CONSTRAINT `FK_Id_Tipo_Usuario` FOREIGN KEY (`Id_Tipo_Usuario`) REFERENCES `tipo_usuario` (`Id_Tipo_Usuario`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -837,7 +833,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (7,1,'jjose','jairo',1,4,'José Pérez'),(9,1,'root','root',1,2,'Administrador'),(10,2,'carlos','carlos',1,1,'Carlos Ortíz'),(11,1,'amiranda','amiranda',1,6,'Antonio Miranda');
+INSERT INTO `usuario` VALUES (7,1,'jjose','783405ad55a312769ee5094312fb3a09',1,4,'José Pérez'),(9,1,'root','63a9f0ea7bb98050796b649e85481845',1,2,'Administrador'),(10,2,'carlos','dc599a9972fde3045dab59dbd1ae170b',1,1,'Carlos Ortíz'),(11,1,'amiranda','6de6230866b56dcb74ac5752d4064f38',1,6,'Antonio Miranda');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -850,4 +846,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-25 14:25:33
+-- Dump completed on 2013-03-26 11:56:05

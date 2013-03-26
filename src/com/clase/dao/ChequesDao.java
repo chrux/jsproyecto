@@ -21,21 +21,21 @@ public class ChequesDao {
 	
 	public ArrayList<Cheques> getLista() {
 		ArrayList<Cheques> Lista = new ArrayList<Cheques>();
-		String q = "select * from ejecucion order by Id_Ejecucion;";
+		String q = "select * from ejecucion order by id_ejecucion;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 				Cheques misCheques = new Cheques();
-				misCheques.setIdCheque(cx.getInt("Id_Ejecucion") );
-				misCheques.setIdProveedor(cx.getInt("Id_Proveedor"));
-				misCheques.setIdProyecto(cx.getInt("Id_Proyecto"));
-				misCheques.setMonto(cx.getDouble("Monto"));
-				misCheques.setFechaEmision(cx.getDateStamp("Fecha_Emision"));
-				misCheques.setNumCheque(cx.getInt("Numero_Cheque"));
-				misCheques.setConcepto(cx.getString("Concepto"));
-				misCheques.setEstado(cx.getString("Estado"));
+				misCheques.setIdCheque(cx.getInt("id_ejecucion") );
+				misCheques.setIdProveedor(cx.getInt("id_proveedor"));
+				misCheques.setIdProyecto(cx.getInt("id_proyecto"));
+				misCheques.setMonto(cx.getDouble("monto"));
+				misCheques.setFechaEmision(cx.getDateStamp("fecha_emision"));
+				misCheques.setNumCheque(cx.getInt("numero_cheque"));
+				misCheques.setConcepto(cx.getString("concepto"));
+				misCheques.setEstado(cx.getString("estado"));
 				
 				Lista.add(misCheques);
 			}
@@ -50,7 +50,7 @@ public class ChequesDao {
 		Cheques misCheques = new Cheques();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from ejecucion where Id_Ejecucion=?;";
+		String sql = "Select * from ejecucion where id_ejecucion=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -59,13 +59,13 @@ public class ChequesDao {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				misCheques.setIdProveedor(cx.getInt("Id_Proveedor"));
-				misCheques.setIdProyecto(cx.getInt("Id_Proyecto"));
-				misCheques.setMonto(cx.getDouble("Monto"));
-				misCheques.setFechaEmision(cx.getDateStamp("Fecha_Emision"));
-				misCheques.setNumCheque(cx.getInt("Numero_Cheque"));
-				misCheques.setConcepto(cx.getString("Concepto"));
-				misCheques.setEstado(cx.getString("Estado"));
+				misCheques.setIdProveedor(cx.getInt("id_proveedor"));
+				misCheques.setIdProyecto(cx.getInt("id_proyecto"));
+				misCheques.setMonto(cx.getDouble("monto"));
+				misCheques.setFechaEmision(cx.getDateStamp("fecha_emision"));
+				misCheques.setNumCheque(cx.getInt("numero_cheque"));
+				misCheques.setConcepto(cx.getString("concepto"));
+				misCheques.setEstado(cx.getString("estado"));
 				
 			}
 			cx.cleanup();
@@ -79,7 +79,7 @@ public class ChequesDao {
 	
 	public ArrayList<Cheques> getLista(int id) {
 		ArrayList<Cheques> Lista = new ArrayList<Cheques>();
-		String q = "Select * From ejecucion where Id_Proyecto=?;";//+ id + ";" ;
+		String q = "Select * From ejecucion where id_proyecto=?;";//+ id + ";" ;
 		
 		System.out.println(q + " id=" + id);
 		
@@ -96,14 +96,14 @@ public class ChequesDao {
 		cx.executestmt();
 			while (cx.getNext()) {
 				Cheques misCheques = new Cheques();
-				misCheques.setIdCheque(cx.getInt("Id_Ejecucion"));
-				misCheques.setIdProveedor(cx.getInt("Id_Proveedor"));
-				misCheques.setIdProyecto(cx.getInt("Id_Proyecto"));
-				misCheques.setMonto(cx.getDouble("Monto"));
-				misCheques.setFechaEmision(cx.getDateStamp("Fecha_Emision"));
-				misCheques.setNumCheque(cx.getInt("Numero_Cheque"));
-				misCheques.setConcepto(cx.getString("Concepto"));
-				misCheques.setEstado(cx.getString("Estado"));
+				misCheques.setIdCheque(cx.getInt("id_ejecucion"));
+				misCheques.setIdProveedor(cx.getInt("id_proveedor"));
+				misCheques.setIdProyecto(cx.getInt("id_proyecto"));
+				misCheques.setMonto(cx.getDouble("monto"));
+				misCheques.setFechaEmision(cx.getDateStamp("fecha_emision"));
+				misCheques.setNumCheque(cx.getInt("numero_cheque"));
+				misCheques.setConcepto(cx.getString("concepto"));
+				misCheques.setEstado(cx.getString("estado"));
 				
 				Lista.add(misCheques);
 			}
@@ -115,7 +115,7 @@ public class ChequesDao {
 	}
 
 	public int DelCheque(Cheques myCheque){
-		String q = "delete from ejecucion where Id_Proyecto=? and Id_Ejecucion=?;";
+		String q = "delete from ejecucion where id_proyecto=? and id_ejecucion=?;";
 		int band=0;
 		ConnDB cx = new ConnDB();
 
@@ -141,7 +141,7 @@ public class ChequesDao {
 	
 	
 	public int addCheque(Cheques myCheque) {
-		String q = "insert into ejecucion(Id_Ejecucion, Id_Tasa_Cambio,Id_Proveedor,Id_Proyecto,Id_Cuentas_Bancos,Monto,Fecha_Emision,Numero_Cheque,Concepto,Estado) " +
+		String q = "insert into ejecucion(id_ejecucion, id_tasa_cambio, id_proveedor, id_proyecto, id_cuentas_bancos, monto, fecha_emision, numero_cheque, concepto, estado) " +
 				"values(?,?,?,?,?,?,?,?,?,?);";
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
@@ -151,9 +151,9 @@ public class ChequesDao {
 		int idTasa=0;
 		int idCuenta=0;
 		int band=0;
-		String qmax = "select max(Id_Ejecucion) + 1 as newid from ejecucion;";
-		String tasa= "select max(Id_Tasa_Cambio)  as idTasa from tasa_de_cambio;";
-		String cuenta= "select max(Id_Cuenta)  as idCuenta from cuentas_bancos;";
+		String qmax = "select max(id_ejecucion) + 1 as newid from ejecucion;";
+		String tasa= "select max(id_tasa_cambio)  as idtasa from tasa_de_cambio;";
+		String cuenta= "select max(id_cuenta)  as idcuenta from cuentas_bancos;";
 		System.out.println(qmax);
 				ConnDB cx = new ConnDB();
 				try {
@@ -165,13 +165,13 @@ public class ChequesDao {
 					
 					cx.consulta(tasa);
 					while (cx.getNext()) {
-						idTasa=cx.getInt("idTasa");	
+						idTasa=cx.getInt("idtasa");	
 					}
 					
 					cx.consulta(cuenta);
 					
 					while (cx.getNext()) {
-						idCuenta=cx.getInt("idCuenta");	
+						idCuenta=cx.getInt("idcuenta");	
 					}
 					
 					

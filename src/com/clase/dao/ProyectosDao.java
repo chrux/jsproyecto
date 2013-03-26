@@ -23,7 +23,7 @@ public class ProyectosDao {
 		
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * From proyecto where Id_Proyecto=?;";
+		String sql = "Select * From proyecto where id_proyecto=?;";
 		System.out.println("Entra a la sentencia: " + sql + id);
 
 		try {
@@ -34,18 +34,18 @@ public class ProyectosDao {
 
 			while (cx.getNext()) {
 				proy.setIdProyecto(id);
-				proy.setIdCliente(cx.getInt("Id_Cliente"));
-				proy.setIdMoneda(cx.getInt("Id_Moneda"));
-				proy.setIdTipoOferta(cx.getInt("Id_Tipo_Oferta"));
-				proy.setNombre(cx.getString("Nombre"));
-				proy.setMontoPresupuesto(cx.getDouble("Monto_Presupuesto"));
-				proy.setObservaciones(cx.getString("Observaciones"));
-				proy.setEstado(cx.getString("Estado"));
-				proy.setFechaCierre (cx.getDateStamp("Fecha_Cierre"));
-				proy.setFechaAceptacion(cx.getDateStamp("Fecha_Aceptacion"));
-				proy.setFechaOferta(cx.getDateStamp("Fecha_de_Oferta"));
-				proy.setMontoOferta(cx.getDouble("Monto_Oferta"));
-				proy.setNumOferta(cx.getInt("Numero_Oferta"));
+				proy.setIdCliente(cx.getInt("id_cliente"));
+				proy.setIdMoneda(cx.getInt("id_moneda"));
+				proy.setIdTipoOferta(cx.getInt("id_tipo_oferta"));
+				proy.setNombre(cx.getString("nombre"));
+				proy.setMontoPresupuesto(cx.getDouble("monto_presupuesto"));
+				proy.setObservaciones(cx.getString("observaciones"));
+				proy.setEstado(cx.getString("estado"));
+				proy.setFechaCierre (cx.getDateStamp("fecha_cierre"));
+				proy.setFechaAceptacion(cx.getDateStamp("fecha_aceptacion"));
+				proy.setFechaOferta(cx.getDateStamp("fecha_de_oferta"));
+				proy.setMontoOferta(cx.getDouble("monto_oferta"));
+				proy.setNumOferta(cx.getInt("numero_oferta"));
 			}
 			cx.cleanup();
 
@@ -62,26 +62,26 @@ public class ProyectosDao {
 	
 	public ArrayList<Proyecto> getLista() {
 		ArrayList<Proyecto> Lista = new ArrayList<Proyecto>();
-		String q = "select * from proyecto order by Id_Proyecto;";
+		String q = "select * from proyecto order by id_proyecto;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 				Proyecto myProy = new Proyecto();
-				myProy.setIdProyecto(cx.getInt("Id_Proyecto"));
-				myProy.setIdTipoOferta(cx.getInt("Id_Tipo_Oferta"));
-				myProy.setIdCliente(cx.getInt("Id_Cliente"));
-				myProy.setNombre(cx.getString("Nombre"));
-				myProy.setFechaOferta(cx.getDateStamp("Fecha_de_Oferta"));
-				myProy.setMontoOferta(cx.getDouble("Monto_Oferta"));
-				myProy.setFechaAceptacion(cx.getDateStamp("Fecha_Aceptacion"));//Aplicar como fecha de presupuesto y de inicio
-				myProy.setNumOferta(cx.getInt("Numero_Oferta"));
-				myProy.setMontoPresupuesto(cx.getDouble("Monto_Presupuesto"));
-				myProy.setEstado(cx.getString("Estado"));
-				myProy.setFechaCierre(cx.getDateStamp("Fecha_Cierre"));
-				myProy.setObservaciones(cx.getString("Observaciones"));
-				myProy.setIdMoneda(cx.getInt("Id_Moneda"));
+				myProy.setIdProyecto(cx.getInt("id_proyecto"));
+				myProy.setIdTipoOferta(cx.getInt("id_tipo_oferta"));
+				myProy.setIdCliente(cx.getInt("id_cliente"));
+				myProy.setNombre(cx.getString("nombre"));
+				myProy.setFechaOferta(cx.getDateStamp("fecha_de_oferta"));
+				myProy.setMontoOferta(cx.getDouble("monto_oferta"));
+				myProy.setFechaAceptacion(cx.getDateStamp("fecha_aceptacion"));//Aplicar como fecha de presupuesto y de inicio
+				myProy.setNumOferta(cx.getInt("numero_oferta"));
+				myProy.setMontoPresupuesto(cx.getDouble("monto_presupuesto"));
+				myProy.setEstado(cx.getString("estado"));
+				myProy.setFechaCierre(cx.getDateStamp("fecha_cierre"));
+				myProy.setObservaciones(cx.getString("observaciones"));
+				myProy.setIdMoneda(cx.getInt("id_moneda"));
 				
 				Lista.add(myProy);
 			}
@@ -94,12 +94,12 @@ public class ProyectosDao {
 	
 	public int addProyecto(Proyecto proy) {
 
-		String q = "insert into proyecto(Id_Proyecto, Id_Tipo_Oferta,Id_Cliente,Nombre,Fecha_de_Oferta,Monto_Oferta,Fecha_Aceptacion,Fecha_Presupuesto,Fecha_Inicio,Numero_Oferta,Monto_Presupuesto, Estado,Fecha_Cierre,Observaciones,Id_Moneda) " +
+		String q = "insert into proyecto(id_proyecto, id_tipo_oferta, id_cliente, nombre, fecha_de_oferta, monto_oferta, fecha_aceptacion, fecha_presupuesto, fecha_inicio, numero_oferta, monto_presupuesto, estado, fecha_cierre, observaciones, id_moneda) " +
 		"values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
 		int newid = 0;
 		int band = 0;
-		String qmax = "select max(Id_Proyecto) + 1 as newid from proyecto;";
+		String qmax = "select max(id_proyecto) + 1 as newid from proyecto;";
 System.out.println(qmax);
 		ConnDB cx = new ConnDB();
 
@@ -158,8 +158,8 @@ System.out.println(qmax);
 	
 	public int updProyecto(Proyecto proy) {
 		int band = 0;
-		String q = "update proyecto set Id_Tipo_Oferta=?,Id_Cliente=?,Nombre=?,Fecha_de_Oferta=?,Monto_Oferta=?,Fecha_Aceptacion=?,Numero_Oferta=?,Fecha_Presupuesto=?,Monto_Presupuesto=?,Fecha_Inicio=?,Fecha_Cierre=?,Estado=?,Observaciones=?,Id_Moneda=? " +
-			" where Id_Proyecto=?;";
+		String q = "update proyecto set id_tipo_oferta=?, id_cliente=?, nombre=?, fecha_de_oferta=?, monto_oferta=?, fecha_aceptacion=?, numero_oferta=?, fecha_presupuesto=?, monto_presupuesto=?, fecha_inicio=?, fecha_cierre=?, estado=?, observaciones=?, id_moneda=? " +
+			" where id_proyecto=?;";
 		
 		ConnDB cx = new ConnDB();
 		System.out.println(q);
@@ -213,9 +213,9 @@ System.out.println(qmax);
 	}
 	
 	public int delProyecto(Proyecto myProyecto) {
-		String q = "delete from proyecto where Id_Proyecto=?;";
-		String delQ="delete from personal_proyecto where Id_Proyecto=?;";
-		String delSq="delete from ejecucion where Id_Proyecto=?;";
+		String q = "delete from proyecto where id_proyecto=?;";
+		String delQ="delete from personal_proyecto where id_proyecto=?;";
+		String delSq="delete from ejecucion where id_proyecto=?;";
 
 		int band = 0;
 

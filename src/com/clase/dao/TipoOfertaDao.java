@@ -20,7 +20,7 @@ public class TipoOfertaDao {
 		
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * From tipo_oferta where Id_Tipo_Oferta=?;";
+		String sql = "Select * From tipo_oferta where id_tipo_oferta=?;";
 		System.out.println("Entra a la sentencia: " + sql + id);
 
 		try {
@@ -31,8 +31,8 @@ public class TipoOfertaDao {
 
 			while (cx.getNext()) {
 				tipoOferta.setIdTipoOferta(id);
-				tipoOferta.setNombreOferta(cx.getString("Nombre_Oferta"));
-				tipoOferta.setEstado(cx.getString("Estado"));
+				tipoOferta.setNombreOferta(cx.getString("nombre_oferta"));
+				tipoOferta.setEstado(cx.getString("estado"));
 			}
 			cx.cleanup();
 
@@ -51,16 +51,16 @@ public class TipoOfertaDao {
 	 **/
 	public ArrayList<TipoOferta> getLista() {
 		ArrayList<TipoOferta> Lista = new ArrayList<TipoOferta>();
-		String q = "select * from tipo_oferta order by Id_Tipo_Oferta;";
+		String q = "select * from tipo_oferta order by id_tipo_oferta;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 TipoOferta myType = new TipoOferta();
-				myType.setIdTipoOferta(cx.getInt("Id_Tipo_Oferta"));
-			myType.setNombreOferta(cx.getString("Nombre_Oferta"));
-						myType.setEstado(cx.getString("Estado"));
+				myType.setIdTipoOferta(cx.getInt("id_tipo_oferta"));
+			myType.setNombreOferta(cx.getString("nombre_oferta"));
+						myType.setEstado(cx.getString("estado"));
 				
 				Lista.add(myType);
 			}

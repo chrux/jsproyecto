@@ -12,16 +12,16 @@ public class MacGregorDao implements MacGregorInf {
 	@Override
 	public ArrayList<Banco> getLista() {
 		ArrayList<Banco> Lista = new ArrayList<Banco>();
-		String q = "select * from banco order by Id_Banco;";
+		String q = "select * from banco order by id_banco;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 				Banco myBank = new Banco();
-				myBank.setIdBanco(cx.getInt("Id_Banco"));
-				myBank.setNombre(cx.getString("Nombre_Banco"));
-				myBank.setEstado(cx.getString("Estado"));
+				myBank.setIdBanco(cx.getInt("id_banco"));
+				myBank.setNombre(cx.getString("nombre_banco"));
+				myBank.setEstado(cx.getString("estado"));
 				
 				Lista.add(myBank);
 			}
@@ -35,11 +35,11 @@ public class MacGregorDao implements MacGregorInf {
 	@Override
 	public int addBanco(Banco banco) {
 
-		String q = "insert into banco(Id_Banco, Nombre_Banco, Estado) values(?,?,?);";
+		String q = "insert into banco(id_banco, nombre_banco, estado) values(?,?,?);";
 
 		int newid = 0;
 		int band = 0;
-		String qmax = "select count(Id_Banco) + 1 as newid from banco;";
+		String qmax = "select count(id_banco) + 1 as newid from banco;";
 
 		ConnDB cx = new ConnDB();
 
@@ -85,7 +85,7 @@ public class MacGregorDao implements MacGregorInf {
 	@Override
 	public int updBanco(Banco banco) {
 
-		String q = "update banco set Nombre_Banco=?,Estado=? where Id_Banco=?;";
+		String q = "update banco set nombre_banco=?,estado=? where id_banco=?;";
 
 		int band = 0;
 
@@ -120,7 +120,7 @@ public class MacGregorDao implements MacGregorInf {
 
 	@Override
 	public int delBanco(Banco banco) {
-		String q = "delete from banco where Id_Banco=?;";
+		String q = "delete from banco where id_banco=?;";
 
 		int band = 0;
 
@@ -152,16 +152,16 @@ public class MacGregorDao implements MacGregorInf {
 	
 	public ArrayList<TipoCliente> getListaTipoCl() {
 		ArrayList<TipoCliente> Lista = new ArrayList<TipoCliente>();
-		String q = "select * from tipo_Cliente order by Id_Tipo_Cliente;";
+		String q = "select * from tipo_cliente order by id_tipo_cliente;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 				TipoCliente myTipoCl = new TipoCliente() ;
-				myTipoCl.setIdTipoCliente(cx.getInt("Id_Tipo_Cliente"));
-				myTipoCl.setTipoCliente(cx.getString("Tipo_Cliente"));
-				myTipoCl.setEstado(cx.getString("Estado"));
+				myTipoCl.setIdTipoCliente(cx.getInt("id_tipo_cliente"));
+				myTipoCl.setTipoCliente(cx.getString("tipo_cliente"));
+				myTipoCl.setEstado(cx.getString("estado"));
 				
 				Lista.add(myTipoCl);
 			}
@@ -175,11 +175,11 @@ public class MacGregorDao implements MacGregorInf {
 	
 	public int addClientTy(TipoCliente clientTy) {
 
-		String q = "insert into tipo_Cliente(Id_Tipo_Cliente, Tipo_Cliente, Estado) values(?,?,?);";
+		String q = "insert into tipo_cliente(id_tipo_cliente, tipo_cliente, estado) values(?,?,?);";
 
 		int newid = 0;
 		int band = 0;
-		String qmax = "select max(Id_Tipo_Cliente) + 1 as newid from tipo_Cliente;";
+		String qmax = "select max(id_tipo_cliente) + 1 as newid from tipo_cliente;";
 
 		ConnDB cx = new ConnDB();
 
@@ -222,7 +222,7 @@ public class MacGregorDao implements MacGregorInf {
 	
 	public int updClientTy(TipoCliente clientTy) {
 
-		String q = "update tipo_Cliente set Tipo_Cliente=?,Estado=? where Id_Tipo_Cliente=?;";
+		String q = "update tipo_cliente set tipo_cliente=?,estado=? where id_tipo_cliente=?;";
 
 		int band = 0;
 
@@ -252,7 +252,7 @@ public class MacGregorDao implements MacGregorInf {
 	
 
 	public int delClientTy(TipoCliente clientTy) {
-		String q = "delete from tipo_Cliente where Id_Tipo_Cliente=?;";
+		String q = "delete from tipo_cliente where id_tipo_cliente=?;";
 
 		int band = 0;
 
@@ -282,7 +282,7 @@ public class MacGregorDao implements MacGregorInf {
 		Banco est = new Banco();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from banco where Id_Banco=?;";
+		String sql = "Select * from banco where id_banco=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -308,7 +308,7 @@ public class MacGregorDao implements MacGregorInf {
 		TipoCliente TipoCl = new TipoCliente();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from tipo_Cliente where Id_Tipo_Cliente=?;";
+		String sql = "Select * from tipo_cliente where id_tipo_cliente=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -317,8 +317,8 @@ public class MacGregorDao implements MacGregorInf {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				TipoCl.setTipoCliente(cx.getString("Tipo_Cliente"));
-				TipoCl.setEstado(cx.getString("Estado"));
+				TipoCl.setTipoCliente(cx.getString("tipo_cliente"));
+				TipoCl.setEstado(cx.getString("estado"));
 				
 			}
 			cx.cleanup();

@@ -18,16 +18,16 @@ public class CargoDao {
 
 	public ArrayList<Cargo> getLista() {
 		ArrayList<Cargo> Lista = new ArrayList<Cargo>();
-		String q = "select * from cargo order by Id_Cargo;";
+		String q = "select * from cargo order by id_cargo;";
 
 		ConnDB cx = new ConnDB();
 		try {
 			cx.consulta(q);
 			while (cx.getNext()) {
 				Cargo myPosition = new Cargo();
-				myPosition.setIdCargo(cx.getInt("Id_Cargo"));
-				myPosition.setNombreCargo(cx.getString("Nombre_Cargo"));
-				myPosition.setEstado(cx.getString("Estado"));
+				myPosition.setIdCargo(cx.getInt("id_cargo"));
+				myPosition.setNombreCargo(cx.getString("nombre_cargo"));
+				myPosition.setEstado(cx.getString("estado"));
 				
 				Lista.add(myPosition);
 			}
@@ -41,11 +41,11 @@ public class CargoDao {
 	
 	public int addCargo(Cargo cargo) {
 
-		String q = "insert into Cargo(Id_Cargo, Nombre_Cargo, Estado) values(?,?,?);";
+		String q = "insert into Cargo(id_cargo, nombre_cargo, estado) values(?,?,?);";
 
 		int newid = 0;
 		int band = 0;
-		String qmax = "select count(Id_Cargo) + 1 as newid from Cargo;";
+		String qmax = "select count(id_cargo) + 1 as newid from Cargo;";
 
 		ConnDB cx = new ConnDB();
 
@@ -87,7 +87,7 @@ public class CargoDao {
 	
 	public int updCargo(Cargo cargo) {
 
-		String q = "update cargo set Nombre_Cargo=?,Estado=? where Id_Cargo=?;";
+		String q = "update cargo set nombre_cargo=?,estado=? where id_cargo=?;";
 
 		int band = 0;
 
@@ -117,7 +117,7 @@ public class CargoDao {
 	}
 	
 	public int delCargo(Cargo cargo) {
-		String q = "delete from cargo where Id_Cargo=?;";
+		String q = "delete from cargo where id_cargo=?;";
 
 		int band = 0;
 
@@ -147,7 +147,7 @@ public class CargoDao {
 		Cargo est = new Cargo();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from cargo where Id_Cargo=?;";
+		String sql = "Select * from cargo where id_cargo=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -156,8 +156,8 @@ public class CargoDao {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				est.setNombreCargo(cx.getString("Nombre_Cargo"));
-				est.setEstado(cx.getString("Estado"));
+				est.setNombreCargo(cx.getString("nombre_cargo"));
+				est.setEstado(cx.getString("estado"));
 				
 			}
 			cx.cleanup();

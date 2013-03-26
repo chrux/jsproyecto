@@ -3,6 +3,7 @@ package com.clase.dao;
 import com.clase.dao.ConnDB;
 
 import com.clase.models.Usuario;
+import com.clase.util.Hash;
 
 public class UsuarioDao {
 
@@ -15,7 +16,7 @@ public class UsuarioDao {
 		Usuario user = new Usuario();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from usuario where Nombre_Usuario=?;";
+		String sql = "Select * from usuario where nombre_usuario=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -25,8 +26,8 @@ public class UsuarioDao {
 			cx.executestmt();
 
 			if (cx.getNext()) {
-				user.setNombre(cx.getString("Nombre"));
-				user.setNlogin(cx.getString("Nombre_Usuario"));
+				user.setNombre(cx.getString("nombre"));
+				user.setNlogin(cx.getString("nombre_usuario"));
 				} else {
 				user = null;
 			}
@@ -42,19 +43,19 @@ public class UsuarioDao {
 		Usuario user = new Usuario();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from usuario where Nombre_Usuario=? and Contrasena=?;";
+		String sql = "Select * from usuario where nombre_usuario=? and contrasena=?;";
 
 		try {
 			cx.Prepare(sql);
 			cx.setStrings(1, login);
-			cx.setStrings(2, clave);
+			cx.setStrings(2, Hash.md5(clave));
 
 			cx.executestmt();
 
 			if (cx.getNext()) {
-				user.setNombre(cx.getString("Nombre"));
-				user.setNlogin(cx.getString("Nombre_Usuario"));
-				user.setPclave(cx.getString("Contrasena"));
+				user.setNombre(cx.getString("nombre"));
+				user.setNlogin(cx.getString("nombre_usuario"));
+				user.setPclave(cx.getString("contrasena"));
 			} else {
 				user = null;
 			}
@@ -71,7 +72,7 @@ public class UsuarioDao {
 		Boolean band = false;
 		ConnDB cx = new ConnDB();
 
-		String sql = "select o.url, u.Nombre_Usuario from usuario u inner join opcion_por_usuario os on u.Nombre_Usuario=os.Usuario inner join opcion o on os.idopcion=o.idopcion where u.Nombre_Usuario='"
+		String sql = "select o.url, u.nombre_usuario from usuario u inner join opcion_por_usuario os on u.nombre_usuario=os.usuario inner join opcion o on os.idopcion=o.idopcion where u.nombre_usuario='"
 				+ login + "' and o.url='" + url + "';";
 
 		System.out.println(sql);
@@ -94,5 +95,4 @@ public class UsuarioDao {
 
 		return band;
 	}
-
 }

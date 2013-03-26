@@ -8,9 +8,9 @@ public class Menu {
 	public String getListMenu(Usuario user, String ruta) {
 		String datos = "";
 
-		String sql = "Select o.idopcion, o.url, o.descripcion, os.Usuario, (select count(idopcion) from Opcion h where h.padre=o.idopcion) hijos  from Opcion o " + 
+		String sql = "Select o.idopcion, o.url, o.descripcion, os.usuario, (select count(idopcion) from opcion h where h.padre=o.idopcion) hijos from opcion o " + 
 " inner join opcion_por_usuario os on os.idopcion=o.idopcion "+ 
-" where o.padre=0 and o.orden<>0 and os.Usuario=? order by o.orden;";
+" where o.padre=0 and o.orden<>0 and os.usuario=? order by o.orden;";
 
 		System.out.println("Esta es la query para el menú: " + sql + " Este es el login: " + user.getNlogin() );
 		ConnDB cx = new ConnDB();
@@ -48,9 +48,9 @@ public class Menu {
 	public String getHijos(String usuario, int padre, String ruta) {
 		String hijos = "";
 
-		String sql = "Select o.idopcion, o.url, o.descripcion, os.Usuario, (select count(idopcion) from Opcion h where h.padre=o.idopcion) hijos from Opcion o " + 
+		String sql = "Select o.idopcion, o.url, o.descripcion, os.usuario, (select count(idopcion) from opcion h where h.padre=o.idopcion) hijos from opcion o " + 
 " inner join opcion_por_usuario os on os.idopcion=o.idopcion " +
-" where o.padre=?  and os.Usuario=? order by o.orden;";
+" where o.padre=? and os.usuario=? order by o.orden;";
 
 		System.out.println("Esta es la query para el menú: " + sql + " Este es el padre: " + padre + " Este es el usuario" + usuario );
 		ConnDB cx = new ConnDB();

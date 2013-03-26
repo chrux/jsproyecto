@@ -91,8 +91,7 @@ cierre = request.getParameter("cierre");
 			mensaje = "Usuario no existe!";
 			response.sendRedirect("./login.jsp?mensaje=" + mensaje);
 			return;
-		}
-		else {
+		} else {
 			usuario = service.getUsuario(login, password);
 			if (usuario == null) {
 				mensaje = "Usuario o Clave incorrectos!";

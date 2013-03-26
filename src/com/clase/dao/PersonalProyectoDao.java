@@ -23,7 +23,7 @@ public class PersonalProyectoDao {
 		
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * From personal_proyecto where Id_Proyecto=?;";
+		String sql = "Select * From personal_proyecto where id_proyecto=?;";
 		System.out.println("Entra a la sentencia: " + sql + id);
 
 		try {
@@ -34,12 +34,12 @@ public class PersonalProyectoDao {
 
 			while (cx.getNext()) {
 				persProy.setIdProyecto(id);
-				persProy.setIdCargo(cx.getInt("Id_Cargo"));
-				persProy.setIdOficio(cx.getInt("Id_Oficio"));
-				persProy.setIdPersonal(cx.getInt("Id_Personal"));
-				persProy.setIdPersonalProy(cx.getInt("Id_Personal_Proyecto"));
-				persProy.setFechaInicio(cx.getDateStamp("Fecha_Inicio"));
-				persProy.setFechaFinal(cx.getDateStamp("Fecha_Final"));
+				persProy.setIdCargo(cx.getInt("id_cargo"));
+				persProy.setIdOficio(cx.getInt("id_oficio"));
+				persProy.setIdPersonal(cx.getInt("id_personal"));
+				persProy.setIdPersonalProy(cx.getInt("id_personal_proyecto"));
+				persProy.setFechaInicio(cx.getDateStamp("fecha_inicio"));
+				persProy.setFechaFinal(cx.getDateStamp("fecha_final"));
 				
 			
 			}
@@ -57,7 +57,7 @@ public class PersonalProyectoDao {
 	
 	public ArrayList<PersonalProyecto> getLista(int id) {
 		ArrayList<PersonalProyecto> Lista = new ArrayList<PersonalProyecto>();
-		String q = "Select * From personal_proyecto where Id_Proyecto=?;";//+ id + ";" ;
+		String q = "Select * From personal_proyecto where id_proyecto=?;";//+ id + ";" ;
 
 		ConnDB cx = new ConnDB();
 		try {
@@ -71,13 +71,13 @@ public class PersonalProyectoDao {
 		cx.executestmt();
 			while (cx.getNext()) {
 				PersonalProyecto persProy = new PersonalProyecto();
-				persProy.setIdProyecto(cx.getInt("Id_Proyecto"));
-				persProy.setIdCargo(cx.getInt("Id_Cargo"));
-				persProy.setIdOficio(cx.getInt("Id_Oficio"));
-				persProy.setIdPersonal(cx.getInt("Id_Personal"));
-				persProy.setIdPersonalProy(cx.getInt("Id_Personal_Proyecto"));
-				persProy.setFechaInicio(cx.getDateStamp("Fecha_Inicio"));
-				persProy.setFechaFinal(cx.getDateStamp("Fecha_Final"));
+				persProy.setIdProyecto(cx.getInt("id_proyecto"));
+				persProy.setIdCargo(cx.getInt("id_cargo"));
+				persProy.setIdOficio(cx.getInt("id_oficio"));
+				persProy.setIdPersonal(cx.getInt("id_personal"));
+				persProy.setIdPersonalProy(cx.getInt("id_personal_proyecto"));
+				persProy.setFechaInicio(cx.getDateStamp("fecha_inicio"));
+				persProy.setFechaFinal(cx.getDateStamp("fecha_final"));
 				
 				
 				Lista.add(persProy);
@@ -93,7 +93,7 @@ public class PersonalProyectoDao {
 	
 	public ArrayList<PersonalProyecto> getLista() {
 		ArrayList<PersonalProyecto> Lista = new ArrayList<PersonalProyecto>();
-		String q = "Select * From personal_proyecto order by Id_Personal_Proyecto;";
+		String q = "Select * From personal_proyecto order by id_personal_proyecto;";
 
 		ConnDB cx = new ConnDB();
 		try {
@@ -101,13 +101,13 @@ public class PersonalProyectoDao {
 			
 			while (cx.getNext()) {
 				PersonalProyecto persProy = new PersonalProyecto();
-				persProy.setIdProyecto(cx.getInt("Id_Proyecto"));
-				persProy.setIdCargo(cx.getInt("Id_Cargo"));
-				persProy.setIdOficio(cx.getInt("Id_Oficio"));
-				persProy.setIdPersonal(cx.getInt("Id_Personal"));
-				persProy.setIdPersonalProy(cx.getInt("Id_Personal_Proyecto"));
-				persProy.setFechaInicio(cx.getDateStamp("Fecha_Inicio"));
-				persProy.setFechaFinal(cx.getDateStamp("Fecha_Final"));
+				persProy.setIdProyecto(cx.getInt("id_proyecto"));
+				persProy.setIdCargo(cx.getInt("id_cargo"));
+				persProy.setIdOficio(cx.getInt("id_oficio"));
+				persProy.setIdPersonal(cx.getInt("id_personal"));
+				persProy.setIdPersonalProy(cx.getInt("id_personal_proyecto"));
+				persProy.setFechaInicio(cx.getDateStamp("fecha_inicio"));
+				persProy.setFechaFinal(cx.getDateStamp("fecha_final"));
 				
 				
 				Lista.add(persProy);
@@ -121,12 +121,12 @@ public class PersonalProyectoDao {
 	
 	public int addProyecto(PersonalProyecto proy) {
 
-		String q = "insert into personal_proyecto(Id_Personal_Proyecto, Id_Personal,Id_Cargo,Id_Oficio,Fecha_Inicio,Fecha_Final,Id_Proyecto) " +
+		String q = "insert into personal_proyecto(id_personal_proyecto, id_personal, id_cargo, id_oficio, fecha_inicio, fecha_final, id_proyecto) " +
 		"values(?,?,?,?,?,?,?);";
 
 		int newid = 0;
 		int band = 0;
-		String qmax = "select max(Id_Personal_Proyecto) + 1 as newid from personal_proyecto;";
+		String qmax = "select max(id_personal_proyecto) + 1 as newid from personal_proyecto;";
 System.out.println(qmax);
 		ConnDB cx = new ConnDB();
 
@@ -176,7 +176,7 @@ System.out.println(qmax);
 	}
 	
 	public int DelPersonalProy(PersonalProyecto myPerson){
-		String q = "delete from personal_proyecto where Id_Personal_Proyecto=?;";
+		String q = "delete from personal_proyecto where id_personal_proyecto=?;";
 		int band=0;
 		ConnDB cx = new ConnDB();
 

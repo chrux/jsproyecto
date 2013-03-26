@@ -17,7 +17,7 @@ public class PersonalDao {
 	
 	public ArrayList<Personal> getLista() {
 		ArrayList<Personal> Lista = new ArrayList<Personal>();
-		String q = "select * from personal order by Id_Personal;";
+		String q = "select * from personal order by id_personal;";
 
 		ConnDB cx = new ConnDB();
 		try {
@@ -25,17 +25,17 @@ public class PersonalDao {
 			while (cx.getNext()) {
 				Personal myPersona = new Personal();
 				
-				myPersona.setIdPersonal(cx.getInt("Id_Personal"));
-				myPersona.setIdOficio(cx.getInt("Id_Oficio"));
-				myPersona.setIdTipoIdentificacion(cx.getInt("Id_Tipo_Identificacion"));
-				myPersona.setIdTipoPersonal(cx.getInt("Id_Tipo_Personal"));
-				myPersona.setNombre(cx.getString("Nombre"));
-				myPersona.setCedula(cx.getString("Cedula"));
-				myPersona.setNacional(cx.getString("Nacional"));
-				myPersona.setEstadoCivil(cx.getString("Estado_Civil"));
-				myPersona.setDireccion(cx.getString("Direccion"));
-				myPersona.setGenero(cx.getString("Genero"));
-				myPersona.setEstado(cx.getString("Estado"));
+				myPersona.setIdPersonal(cx.getInt("id_personal"));
+				myPersona.setIdOficio(cx.getInt("id_oficio"));
+				myPersona.setIdTipoIdentificacion(cx.getInt("id_tipo_identificacion"));
+				myPersona.setIdTipoPersonal(cx.getInt("id_tipo_personal"));
+				myPersona.setNombre(cx.getString("nombre"));
+				myPersona.setCedula(cx.getString("cedula"));
+				myPersona.setNacional(cx.getString("nacional"));
+				myPersona.setEstadoCivil(cx.getString("estado_civil"));
+				myPersona.setDireccion(cx.getString("direccion"));
+				myPersona.setGenero(cx.getString("genero"));
+				myPersona.setEstado(cx.getString("estado"));
 				
 				Lista.add(myPersona);
 			}
@@ -50,7 +50,7 @@ public class PersonalDao {
 		Personal myPersona = new Personal();
 		ConnDB cx = new ConnDB();
 
-		String sql = "Select * from personal where Id_Personal=?;";
+		String sql = "Select * from personal where id_personal=?;";
 
 		try {
 			cx.Prepare(sql);
@@ -59,17 +59,17 @@ public class PersonalDao {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				myPersona.setIdPersonal(cx.getInt("Id_Personal"));
-				myPersona.setIdOficio(cx.getInt("Id_Oficio"));
-				myPersona.setIdTipoIdentificacion(cx.getInt("Id_Tipo_Identificacion"));
-				myPersona.setIdTipoPersonal(cx.getInt("Id_Tipo_Personal"));
-				myPersona.setNombre(cx.getString("Nombre"));
-				myPersona.setCedula(cx.getString("Cedula"));
-				myPersona.setNacional(cx.getString("Nacional"));
-				myPersona.setEstadoCivil(cx.getString("Estado_Civil"));
-				myPersona.setDireccion(cx.getString("Direccion"));
-				myPersona.setGenero(cx.getString("Genero"));
-				myPersona.setEstado(cx.getString("Estado"));
+				myPersona.setIdPersonal(cx.getInt("id_personal"));
+				myPersona.setIdOficio(cx.getInt("id_oficio"));
+				myPersona.setIdTipoIdentificacion(cx.getInt("id_tipo_identificacion"));
+				myPersona.setIdTipoPersonal(cx.getInt("id_tipo_personal"));
+				myPersona.setNombre(cx.getString("nombre"));
+				myPersona.setCedula(cx.getString("cedula"));
+				myPersona.setNacional(cx.getString("nacional"));
+				myPersona.setEstadoCivil(cx.getString("estado_civil"));
+				myPersona.setDireccion(cx.getString("direccion"));
+				myPersona.setGenero(cx.getString("genero"));
+				myPersona.setEstado(cx.getString("estado"));
 				
 			}
 			cx.cleanup();
