@@ -150,6 +150,20 @@ public class Cliente {
 		this.setPaginaWeb(var8);
 		this.setEstado(var9);
 	}
+	
+	public Cliente(int var0,String var1, String var2, String var3, String var4, String var5, String var6, String var7, String var8, String var9 )
+	{
+		this.setIdTipoCliente(var0);
+		this.setNombre(var1);
+		this.setContacto(var2);
+		this.setDireccionPos(var3);
+		this.setDireccionFis(var4);
+		this.setTelefono(var5);
+		this.setEmail(var6);
+		this.setNacionalidad(var7);
+		this.setPaginaWeb(var8);
+		this.setEstado(var9);
+	}
 
 }
 

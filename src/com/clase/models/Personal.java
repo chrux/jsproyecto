@@ -21,6 +21,7 @@ public class Personal {
 	private String direccion;
 	private String genero;
 	private String estado;
+	
 	public int getIdPersonal() {
 		return idPersonal;
 	}
@@ -119,6 +120,20 @@ public class Personal {
 	
 	public Personal(int var0,int var1, int var2, int var3,String var4, String var5,String var6,String var7,String var8,String var9,String var10 ){
 		this.setIdPersonal(var0);
+		this.setIdOficio(var1);
+		this.setIdTipoIdentificacion(var2);
+		this.setIdTipoPersonal(var3);
+		this.setNombre(var4);
+		this.setDireccion(var5);
+		this.setCedula(var6);
+		this.setNacional(var7);
+		this.setEstadoCivil(var8);
+		this.setGenero(var9);
+		this.setEstado(var10);
+		
+	}
+	
+	public Personal(int var1, int var2, int var3,String var4, String var5,String var6,String var7,String var8,String var9,String var10 ){
 		this.setIdOficio(var1);
 		this.setIdTipoIdentificacion(var2);
 		this.setIdTipoPersonal(var3);

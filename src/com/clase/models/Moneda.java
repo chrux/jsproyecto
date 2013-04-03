@@ -39,5 +39,10 @@ public class Moneda {
 	setNombreMoneda(var1);
 	setEstado(var2);
 	}
+	
+	public Moneda(String var1, String var2) throws Exception   {
+		setNombreMoneda(var1);
+		this.setEstado(var2);
+	}
 
 }
