@@ -351,7 +351,7 @@ CREATE TABLE `opcion` (
 
 LOCK TABLES `opcion` WRITE;
 /*!40000 ALTER TABLE `opcion` DISABLE KEYS */;
-INSERT INTO `opcion` VALUES (1,'Catalogos','#',0,2),(2,'Bancos','catalogos/Bancos.jsp',1,1),(3,'Tipos de Clientes','catalogos/TipoClientes.jsp',1,2),(4,'Procesos','#',0,3),(5,'Proyectos','procesos/Proyectos.jsp',4,1),(6,'Cheques Proyectos','procesos/ProyectosCheques.jsp',4,2),(7,'Reportes','#',0,4),(8,'Reportes Generales','pagReportes/Reportes.jsp',7,1),(9,'Rep. Personal Proyecto','pagReportes/ReportePersProyecto.jsp',7,2),(10,'Cargo','catalogos/Cargo.jsp',1,3),(11,'Inicio','inicio/home.jsp',0,1),(12,'Tipos de Usuarios','pagReportes/ListReportes.jsp?tipo=report1',8,1),(13,'Personal','pagReportes/ListReportes.jsp?tipo=rptPersonal',8,2),(14,'Listado de Proyectos','pagReportes/ListReportes.jsp?tipo=rptProyectos',8,3);
+INSERT INTO `opcion` VALUES (1,'Catalogos','#',0,2),(2,'Bancos','catalogos/Bancos.jsp',1,1),(3,'Tipos de Clientes','catalogos/TipoClientes.jsp',1,2),(4,'Procesos','#',0,3),(5,'Proyectos','procesos/Proyectos.jsp',4,1),(6,'Cheques Proyectos','procesos/ProyectosCheques.jsp',4,2),(7,'Reportes','#',0,4),(8,'Reportes Generales','pagReportes/Reportes.jsp',7,1),(9,'Rep. Personal Proyecto','pagReportes/ReportePersProyecto.jsp',7,2),(10,'Cargo','catalogos/Cargo.jsp',1,3),(11,'Inicio','inicio/home.jsp',0,1),(12,'Tipos de Usuarios','pagReportes/ListReportes.jsp?tipo=report1',8,1),(13,'Personal','pagReportes/ListReportes.jsp?tipo=rptPersonal',8,2),(14,'Listado de Proyectos','pagReportes/ListReportes.jsp?tipo=rptProyectos',8,3),(15,'Tasa (desde BCN)','catalogos/tasa-de-cambio.jsp',1,3);
 /*!40000 ALTER TABLE `opcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -846,4 +846,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-26 11:56:05
+-- Dump completed on 2013-04-03 14:38:44
