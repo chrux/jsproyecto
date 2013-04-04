@@ -49,7 +49,8 @@ String mensaje = request.getParameter("mensaje");
 
 	//ELIMINA EL CONTEXTO DE LA APLICACIÓN Y EL
 	//EL NOMBRE DEL RECURSO COINCIDA CON LA RUTA ESCRITA EN LA TABLA
-	name = name.substring(13, name.length());
+	name = name.replaceFirst(ruta, "");
+	if ( name.indexOf("/") == 0 ) name = name.substring(1);
 
 	if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 		response.sendRedirect(ruta + "/inicio/home.jsp?mensaje=Permiso no establecido");

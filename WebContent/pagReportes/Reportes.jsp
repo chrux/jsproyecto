@@ -14,7 +14,7 @@
 java.util.Date date = new java.util.Date(); 
 java.text.SimpleDateFormat sdf=new java.text.SimpleDateFormat("dd/MM/yyyy");
 
-//Parámetro de mensaje
+//Parï¿½metro de mensaje
 String mensaje = request.getParameter("mensaje");
 
 //obtener ruta del contexto
@@ -37,9 +37,10 @@ if (request instanceof HttpServletRequest) {
 config.getServletContext().log(
 		"Ruta: " + name);
 
-//ELIMINA EL CONTEXTO DE LA APLICACIÓN Y EL
+//ELIMINA EL CONTEXTO DE LA APLICACIï¿½N Y EL
 //EL NOMBRE DEL RECURSO COINCIDA CON LA RUTA ESCRITA EN LA TABLA
-name = name.substring(13, name.length());
+name = name.replaceFirst(ruta, "");
+if ( name.indexOf("/") == 0 ) name = name.substring(1);
 
 if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 	response.sendRedirect(ruta + "/inicio/home.jsp?mensaje=Permiso no establecido");
@@ -73,7 +74,7 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
 
 </div>
 <div id="navigation">
-			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar Sesión</a>
+			<a style="color:#fff; text-decoration:none;padding-left:4px;padding-top:4px; display:block;float:left;" href="<%=ruta%>/login.do?cierre=si">Cerrar Sesiï¿½n</a>
 				</div>
 				<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tbody>

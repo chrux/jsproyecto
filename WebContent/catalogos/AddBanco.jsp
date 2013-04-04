@@ -51,10 +51,6 @@ String mensaje = request.getParameter("mensaje");
 	if (request instanceof HttpServletRequest) {
 		name = ((HttpServletRequest) request).getRequestURI();
 	}
-	config.getServletContext().log(
-			"Ruta: " + name);
-
-	
 
 %>
 	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">

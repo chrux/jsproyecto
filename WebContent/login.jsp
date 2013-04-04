@@ -41,7 +41,7 @@ String mensaje = request.getParameter("mensaje");
 		  </div>
 		  <%} %>
 
-          <form method="post" action="./login.do">
+          <form method="post" action="<%= ruta %>/login.do">
             <fieldset>
               <label for="name">Nombre de Usuario</label>
               <input type="text" class="input-block-level" name="name" id="name">
