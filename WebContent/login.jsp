@@ -2,9 +2,18 @@
 <%@ page language="java"
 	  contentType="text/html; charset=utf-8"
 	 pageEncoding="utf-8"%>
+<%@page import="com.clase.models.Usuario"%>
 <%
 String ruta = request.getContextPath();
 String mensaje = request.getParameter("mensaje");
+
+Usuario user = new Usuario();
+user = (Usuario) session.getAttribute("usuario");
+
+if ( user != null ) {
+	response.sendRedirect(ruta + "/inicio/home.jsp");
+	return;
+}
 %>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
