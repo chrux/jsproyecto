@@ -17,6 +17,7 @@ String mensaje = request.getParameter("mensaje");
 <%@page import="com.clase.dao.ProyectosDao"%>
 <%@page import="com.clase.models.Proyecto"%>
 <%@page import="com.clase.models.Usuario"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -80,11 +81,13 @@ String mensaje = request.getParameter("mensaje");
 		name = ((HttpServletRequest) request).getRequestURI();
 	}
 	config.getServletContext().log("Ruta: " + name);
+	SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 %>
 	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
     <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="<%= ruta %>/assets/css/todc-bootstrap.css" rel="stylesheet">
     <link href="<%= ruta %>/assets/css/style.css" rel="stylesheet">
+    <link href="<%= ruta %>/assets/css/datepicker.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -235,19 +238,28 @@ String mensaje = request.getParameter("mensaje");
 		  <div class="control-group">
 		    <label class="control-label" for="fechaOferta">Fecha de la Oferta</label>
 		    <div class="controls">
-		      <input type="text" id="fechaOferta" name="fechaOferta" value="<%=myProy.getFechaOferta()%>" placeholder="Fecha de la Oferta">
+		      <div class="input-append date" id="dp1" data-date="<% if ( myProy != null ) { %><%=df.format(myProy.getFechaOferta()) %><% } %>" data-date-format="dd-mm-yyyy">
+				<input class="span2" size="16" type="text" id="fechaOferta" name="fechaOferta" value="<% if ( myProy != null ) { %><%=df.format(myProy.getFechaOferta()) %><% } %>" readonly="" placeholder="Fecha de la Oferta">
+				<span class="add-on"><i class="icon-calendar"></i></span>
+			  </div>
 		    </div>
 		  </div>
 		  <div class="control-group">
 		    <label class="control-label" for="fechaAceptacion">Fecha de Aceptación</label>
 		    <div class="controls">
-		      <input type="text" id="fechaAceptacion" name="fechaAceptacion" value="<%=myProy.getFechaAceptacion()%>" placeholder="Fecha de Aceptación de la Oferta">
+		      <div class="input-append date" id="dp2" data-date="<% if ( myProy != null ) { %><%=df.format(myProy.getFechaAceptacion()) %><% } %>" data-date-format="dd-mm-yyyy">
+				<input class="span2" size="16" type="text" id="fechaAceptacion" name="fechaAceptacion" value="<% if ( myProy != null ) { %><%=df.format(myProy.getFechaAceptacion()) %><% } %>" readonly="" placeholder="Fecha de Aceptación de la Oferta">
+				<span class="add-on"><i class="icon-calendar"></i></span>
+			  </div>
 		    </div>
 		  </div>
 		  <div class="control-group">
 		    <label class="control-label" for="fechaCierre">Fecha de Cierre</label>
 		    <div class="controls">
-		      <input type="text" id="fechaCierre" name="fechaCierre" value="<%=myProy.getFechaCierre()%>" placeholder="Fecha de Cierre de la Oferta">
+		      <div class="input-append date" id="dp3" data-date="<% if ( myProy != null ) { %><%=df.format(myProy.getFechaCierre()) %><% } %>" data-date-format="dd-mm-yyyy">
+				<input class="span2" size="16" type="text" id="fechaCierre" name="fechaCierre" value="<% if ( myProy != null ) { %><%=df.format(myProy.getFechaCierre()) %><% } %>" readonly="" placeholder="Fecha de Cierre de la Oferta">
+				<span class="add-on"><i class="icon-calendar"></i></span>
+			  </div>
 		    </div>
 		  </div>
 		  <div class="control-group">
@@ -347,5 +359,10 @@ String mensaje = request.getParameter("mensaje");
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="<%= ruta %>/assets/js/jquery.js"></script>
     <script src="<%= ruta %>/assets/js/bootstrap.js"></script>
+    <script src="<%= ruta %>/assets/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+    	$(".date")
+    		.datepicker();
+    </script>
 </body>
 </html>

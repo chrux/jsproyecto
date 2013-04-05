@@ -57,7 +57,7 @@ public class ServiceProyecto extends HttpServlet {
 		Double montoOferta, montoPresupuesto;
 		System.out.println("Accion: " + accion);
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		
 		java.util.Date parsedDate;
 		
