@@ -57,7 +57,7 @@ public class ProveedorDao {
 			cx.executestmt();
 
 			while (cx.getNext()) {
-				myProv.setTipoProveedor(cx.getInt("dd_tipo_proveedor"));
+				myProv.setTipoProveedor(cx.getInt("id_tipo_proveedor"));
 				myProv.setNombre(cx.getString("nombre"));
 				myProv.setContacto(cx.getString("contacto"));
 				myProv.setTelefono(cx.getString("telefono"));
