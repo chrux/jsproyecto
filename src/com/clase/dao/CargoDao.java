@@ -41,11 +41,11 @@ public class CargoDao {
 	
 	public int addCargo(Cargo cargo) {
 
-		String q = "insert into Cargo(id_cargo, nombre_cargo, estado) values(?,?,?);";
+		String q = "insert into cargo(id_cargo, nombre_cargo, estado) values(?,?,?);";
 
 		int newid = 0;
 		int band = 0;
-		String qmax = "select count(id_cargo) + 1 as newid from Cargo;";
+		String qmax = "select max(id_cargo) + 1 as newid from cargo;";
 
 		ConnDB cx = new ConnDB();
 
@@ -65,7 +65,7 @@ public class CargoDao {
 			cx.setStrings(3, cargo.getEstado() );
 
 			
-			System.out.println("Datos Dentro de la función: New Id = " +newid +" Nombre Banco= " + cargo.getNombreCargo() +" Estado = "+  cargo.getEstado() );
+			System.out.println("Datos Dentro de la funciÃ³n: New Id = " +newid +" Nombre Banco= " + cargo.getNombreCargo() +" Estado = "+  cargo.getEstado() );
 			System.out.println(q);
 
 			
