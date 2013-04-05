@@ -52,6 +52,10 @@ String mensaje = request.getParameter("mensaje");
       </div>
 
       <hr>
+      
+      <% if(mensaje!=null) {%>
+	  <div class="alert"><%=mensaje %></div>
+	  <%} %>
 
       <div class="jumbotron">
         <h1>Bienvenido! <%= user.getNombre()%></h1>

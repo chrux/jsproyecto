@@ -53,7 +53,7 @@ public class ServiceProyecto extends HttpServlet {
 		int band = 0;
 		int idProyecto,idTipoOferta,idCliente, numOferta,idMoneda;
 		String nombre, estado, observaciones;
-		Timestamp fechaOferta,fechaAceptacion,fechaCierre;//Aplicar como fecha Aceptación como de presupuesto y de inicio
+		Timestamp fechaOferta,fechaAceptacion,fechaCierre;//Aplicar como fecha Aceptaciï¿½n como de presupuesto y de inicio
 		Double montoOferta, montoPresupuesto;
 		System.out.println("Accion: " + accion);
 		
@@ -67,7 +67,7 @@ public class ServiceProyecto extends HttpServlet {
 			if (accion.equals("nuevo")) {
 				System.out.println("Tipo Oferta " + request.getParameter("idTipoOferta"));
 				System.out.println("Cliente " + request.getParameter("idCliente"));
-				System.out.println("Núm Oferta " + request.getParameter("numOferta"));
+				System.out.println("NÃºm Oferta " + request.getParameter("numOferta"));
 				System.out.println("Moneda " + request.getParameter("idMoneda"));
 				System.out.println("nombre " + request.getParameter("nombre"));
 				System.out.println("estado " + request.getParameter("estado"));
@@ -141,7 +141,7 @@ public class ServiceProyecto extends HttpServlet {
 				
 			} else if (accion.equals("cancel")) {
 
-				mensaje = "Acción Cancelada";
+				mensaje = "AcciÃ³n Cancelada";
 			} else {
 				System.out.println(request.getParameter("idProy"));
 				int id = Integer.parseInt(request.getParameter("idProy"));

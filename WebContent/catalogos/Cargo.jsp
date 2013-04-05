@@ -90,6 +90,10 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
       	</div>
       </div>
       <br />
+      <% if(mensaje!=null) {%>
+	  <div class="alert"><%=mensaje %></div>
+	  <%} %>
+	  <br />
 	  <div>
 	  <table class="table table-bordered">
 		<thead>

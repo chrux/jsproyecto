@@ -48,11 +48,11 @@ HttpSession session = request.getSession();
 
 		
 		String login, password, mensaje,cierre = "";
-		//Cierre de Sesión
+		//Cierre de Sesiï¿½n
 cierre = request.getParameter("cierre");
 		
 		if(cierre!=null){
-			mensaje = "Sesión Cerrada";
+			mensaje = "SesiÃ³n Cerrada";
 			session.invalidate();
 			//session.removeAttribute("usuario");
 			response.sendRedirect(request.getContextPath() + "/login.jsp?mensaje=" + mensaje);

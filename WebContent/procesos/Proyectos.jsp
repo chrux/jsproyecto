@@ -89,6 +89,10 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
       </div>
       
       <br />
+      <% if(mensaje!=null) {%>
+	  <div class="alert"><%=mensaje %></div>
+	  <%} %>
+	  <br />
       
       <div>
       <form class="form-horizontal" action="">

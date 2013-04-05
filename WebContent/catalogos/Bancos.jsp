@@ -79,6 +79,7 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
       </div>
       
       <hr>
+      
       <div class="row-fluid">
       	<div class="span9">
       		<h3 class="no-margin">Bancos</h3>
@@ -88,6 +89,10 @@ if(!permission.getUsuarioPermiso(user.getNlogin() , name)){
       	</div>
       </div>
       <br />
+      <% if(mensaje!=null) {%>
+	  <div class="alert"><%=mensaje %></div>
+	  <%} %>
+	  <br />
 	  <div>
 	  <table class="table table-bordered">
 		<thead>
