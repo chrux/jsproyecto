@@ -18,6 +18,7 @@ String mensaje = request.getParameter("mensaje");
 <%@page import="com.clase.dao.PersonalDao"%>
 <%@page import="com.clase.models.Personal"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -90,8 +91,7 @@ String mensaje = request.getParameter("mensaje");
 
 		}
 
-		
-		
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 %>
 	<link href="<%= ruta %>/assets/css/bootstrap.css" rel="stylesheet">
     <link href="<%= ruta %>/assets/css/bootstrap-responsive.css" rel="stylesheet">
@@ -173,9 +173,12 @@ String mensaje = request.getParameter("mensaje");
 		
 		<tr>
 		<td align="left"><label>Fecha Emisión:</label></td>
-		<td align="left"><input id="fechaEmision" style="width: 247px"
-											name="fechaEmision" type="text" size="10"
-											value="<%=cheque.getFechaEmision() %>" /></td>
+		<td align="left">
+			  <div class="input-append date" id="dp4" data-date="<% if ( cheque != null ) { %><%=df.format(cheque.getFechaEmision()) %><% } %>" data-date-format="dd-mm-yyyy">
+				<input class="span2" size="16" type="text" id="fechaEmision" name="fechaEmision" value="<% if ( cheque != null ) { %><%=df.format(cheque.getFechaEmision()) %><% } %>" readonly="" placeholder="Fecha de Emisión">
+				<span class="add-on"><i class="icon-calendar"></i></span>
+			  </div>
+											</td>
 		</tr>
 		
 		<tr>

@@ -77,7 +77,7 @@ public class ServiceCheques extends HttpServlet {
 		Timestamp fechaEmision;
 		String concepto,estado;
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		java.util.Date parsedDate;
 		try {
 			if (accion.equals("del")) {
